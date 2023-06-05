@@ -5,4 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tekstoviy_redaktor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"/>
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu x:Name="menu" Height="18" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" Background="White">
+            <MenuItem x:Name="file" Header="Файл" FontSize="12" FontFamily="Microsoft Sans Serif" Height="18">
+                <MenuItem x:Name="new_document" Header="Создать" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="new_window" Header="Новое окно" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="open" Header="Открыть" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="save" Header="Сохранить" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="save_as" Header="Сохранить как" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <Separator/>
+                <MenuItem x:Name="page_settings" Header="Параметры страницы" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="printing" Header="Печать" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <Separator/>
+                <MenuItem x:Name="exit" Header="Выход" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+            </MenuItem>
+            <MenuItem x:Name="editing" Header="Правка" FontSize="12" FontFamily="Microsoft Sans Serif">
+                <MenuItem x:Name="cancel" Header="Отменить"/>
+                <Separator/>
+                <MenuItem x:Name="cut" Header="Вырезать"/>
+                <MenuItem x:Name="copy" Header="Копировать"/>
+                <MenuItem x:Name="insert" Header="Вставить"/>
+                <MenuItem x:Name="delete" Header="Удалить"/>
+                <Separator/>
+                <MenuItem x:Name="find" Header="Найти"/>
+                <MenuItem x:Name="find_next" Header="Найти далее"/>
+                <MenuItem x:Name="find_earlier" Header="Найти ранее"/>
+                <MenuItem x:Name="replace" Header="Заменить"/>
+                <MenuItem x:Name="go_to" Header="Перейти"/>
+                <Separator/>
+                <MenuItem x:Name="highlight_all" Header="Выделить всё"/>
+                <MenuItem x:Name="datetime" Header="Дата и время"/>
+            </MenuItem>
+            <MenuItem x:Name="font_style" Header="Шрифт" FontSize="12" FontFamily="Microsoft Sans Serif"/>
+            <MenuItem x:Name="scale" Header="Масштаб" FontSize="12" FontFamily="Microsoft Sans Serif"/>
+            <MenuItem x:Name="about_program" Header="О программе" FontSize="12" Height="18" FontFamily="Microsoft Sans Serif"/>
+        </Menu>
+        <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top"/>
+        <Separator Margin="0,18,0,0" Height="1
+                   " VerticalAlignment="Top"/>
+    </Grid>
+</Window>
