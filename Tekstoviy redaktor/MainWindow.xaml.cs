@@ -24,7 +24,7 @@ namespace Tekstoviy_redaktor
     /// </summary>
     public partial class MainWindow : Window
     {
-        string Filename = "";
+        string Filename = null;
 
         public MainWindow()
         {
@@ -33,13 +33,13 @@ namespace Tekstoviy_redaktor
 
         private void new_document_Click(object sender, RoutedEventArgs e)
         {
-            if (Filename != "")
+            if (Filename != null)
             {
                 TextWriter textWriter = new StreamWriter(@Filename);
                 textWriter.Write(textbox.Text);
                 textWriter.Close();
-                textbox.Text = "";
-                Filename = "";
+                textbox.Clear();
+                Filename = null;
             }
             else
             {
@@ -52,8 +52,8 @@ namespace Tekstoviy_redaktor
                     TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
                     textWriter.Write(textbox.Text);
                     textWriter.Close();
-                    textbox.Text = "";
-                    Filename = "";
+                    textbox.Clear();
+                    Filename = null;
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace Tekstoviy_redaktor
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (Filename != "")
+            if (Filename != null)
             {
                 TextWriter textWriter = new StreamWriter(@Filename);
                 textWriter.Write(textbox.Text);
@@ -127,24 +127,95 @@ namespace Tekstoviy_redaktor
         {
             PrintDialog printDialog = new PrintDialog();
             printDialog.ShowDialog();
-
-            try
-            {
-                XpsDocument xpsDocument = new XpsDocument(Filename, FileAccess.Read);
-                FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
-                DocumentPaginator docPaginator = fixedDocSeq.DocumentPaginator;
-                printDialog.PrintDocument(docPaginator, $"Printing {System.IO.Path.GetFileName(Filename)}");
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            if (Filename != null)
+            {
+                Close();
+            }
+            else
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Текстовые файлы |*.txt|Все файлы |*.*";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    Filename = saveFileDialog.FileName;
+                    TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
+                    textWriter.Write(textbox.Text);
+                    textWriter.Close();
+                }
+                Close();
+            }
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            textbox.Undo();
+        }
+
+        private void cut_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.Clear();
+            textbox.Cut();
+        }
+
+        private void copy_Click(object sender, RoutedEventArgs e)
+        {
+            textbox.Copy();
+        }
+
+        private void insert_Click(object sender, RoutedEventArgs e)
+        {
+            textbox.Paste();
+        }
+
+        private void delete_Click(object sender, RoutedEventArgs e)
+        {
+            textbox.SelectedText = "";
+        }
+
+        private void find_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void find_next_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void find_earlier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void replace_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void go_to_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void highlight_all_Click(object sender, RoutedEventArgs e)
+        {
+            textbox.SelectAll();
+        }
+
+        private void datetime_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime = DateTime.Now;
+            textbox.Text += dateTime.ToLocalTime();
+        }
+
+        private void font_style_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
