@@ -9,16 +9,16 @@
     <Grid>
         <Menu x:Name="menu" Height="18" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" Background="White">
             <MenuItem x:Name="file" Header="Файл" FontSize="12" FontFamily="Microsoft Sans Serif" Height="18">
-                <MenuItem x:Name="new_document" Header="Создать" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
-                <MenuItem x:Name="new_window" Header="Новое окно" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
-                <MenuItem x:Name="open" Header="Открыть" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
-                <MenuItem x:Name="save" Header="Сохранить" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
-                <MenuItem x:Name="save_as" Header="Сохранить как" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="new_document" Header="Создать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="new_document_Click"/>
+                <MenuItem x:Name="new_window" Header="Новое окно" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="new_window_Click"/>
+                <MenuItem x:Name="open" Header="Открыть" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="open_Click"/>
+                <MenuItem x:Name="save" Header="Сохранить" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="save_Click"/>
+                <MenuItem x:Name="save_as" Header="Сохранить как" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="save_as_Click"/>
                 <Separator/>
-                <MenuItem x:Name="page_settings" Header="Параметры страницы" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
-                <MenuItem x:Name="printing" Header="Печать" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="page_settings" Header="Параметры страницы" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="page_settings_Click"/>
+                <MenuItem x:Name="printing" Header="Печать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="printing_Click"/>
                 <Separator/>
-                <MenuItem x:Name="exit" Header="Выход" Background="#00F0F0F0" BorderBrush="#00F0F0F0"/>
+                <MenuItem x:Name="exit" Header="Выход" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="exit_Click"/>
             </MenuItem>
             <MenuItem x:Name="editing" Header="Правка" FontSize="12" FontFamily="Microsoft Sans Serif">
                 <MenuItem x:Name="cancel" Header="Отменить"/>
@@ -42,7 +42,7 @@
             <MenuItem x:Name="about_program" Header="О программе" FontSize="12" Height="18" FontFamily="Microsoft Sans Serif"/>
         </Menu>
         <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top"/>
-        <Separator Margin="0,18,0,0" Height="1
-                   " VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox" Margin="10,18,10,0" TextWrapping="Wrap" Height="416" VerticalAlignment="Top" BorderThickness="0,1,0,0" SelectionBrush="#FFA0A0A0"/>
+        <Separator Margin="0,18,0,0" Height="1                    " VerticalAlignment="Top"/>
     </Grid>
 </Window>
