@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
-using System.Drawing.Printing;
+using System.Reflection;
 
 namespace Tekstoviy_redaktor
 {
@@ -27,7 +27,7 @@ namespace Tekstoviy_redaktor
 
 		public MainWindow()
 		{
-			InitializeComponent();  
+			InitializeComponent();
 		}
 
 		private void new_document_Click(object sender, RoutedEventArgs e)
@@ -60,14 +60,14 @@ namespace Tekstoviy_redaktor
 		private void new_window_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow window = new MainWindow();
-			window.Show(); 
+			window.Show();
 		}
 
 		private void open_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			openFileDialog.Filter = "Текстовые файлы |*.txt|Все файлы |*.*";
-			
+
 			if (openFileDialog.ShowDialog() == true)
 			{
 				Filename = openFileDialog.FileName;
@@ -115,7 +115,7 @@ namespace Tekstoviy_redaktor
 		private void page_settings_Click(object sender, RoutedEventArgs e)
 		{
 			System.Windows.Forms.PageSetupDialog pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
-			pageSetupDialog.PageSettings = new PageSettings();
+			pageSetupDialog.PageSettings = new System.Drawing.Printing.PageSettings();
 
 			pageSetupDialog.ShowNetwork = false;
 
@@ -217,32 +217,36 @@ namespace Tekstoviy_redaktor
 		{
 			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
 
+			if (fontDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+            {
+                string fontfamily = fontDialog.Font.FontFamily.ToString();
+				string fontstyle = fontDialog.Font.Style.ToString();
+                textbox.FontFamily = new FontFamily(fontfamily);
+				textbox.FontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), fontstyle, true);
+				
+				textbox.FontSize = fontDialog.Font.Size;
+            }
 		}
 
 		private void increase_scale_Click(object sender, RoutedEventArgs e)
 		{
-			if (textbox.FontSize <= 28)
-			{
-				textbox.FontSize += 4;
-			}
+			
 		}
 
 		private void decrease_scale_Click(object sender, RoutedEventArgs e)
 		{
-			if (textbox.FontSize >= 12)
-			{
-				textbox.FontSize -= 4;
-			}
-		}	
+			
+		}
 
 		private void default_scale_Click(object sender, RoutedEventArgs e)
 		{
-			textbox.FontSize = 16;
+			
 		}
 
 		private void about_program_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window1 about_program = new Window1();
+			about_program.Show();
 		}
 	}
 }

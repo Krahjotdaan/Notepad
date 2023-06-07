@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tekstoviy_redaktor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Notepad" Height="450" Width="800">
     <Grid>
         <Menu x:Name="menu" Height="18" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" Background="White" FontSize="14">
             <MenuItem x:Name="file" Header="Файл" FontSize="14" FontFamily="Microsoft Sans Serif" Height="18">
