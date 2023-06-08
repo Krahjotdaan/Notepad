@@ -215,16 +215,43 @@ namespace Tekstoviy_redaktor
 
 		private void font_style_Click(object sender, RoutedEventArgs e)
 		{
-			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+            System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+			fontDialog.ShowEffects = false;
 
 			if (fontDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
-                string fontfamily = fontDialog.Font.FontFamily.ToString();
-				string fontstyle = fontDialog.Font.Style.ToString();
-                textbox.FontFamily = new FontFamily(fontfamily);
-				textbox.FontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), fontstyle, true);
-				
+				string fontfamily = fontDialog.Font.FontFamily.ToString();
+                textbox.FontFamily = new FontFamily(fontfamily);	
 				textbox.FontSize = fontDialog.Font.Size;
+				
+				if (fontDialog.Font.Bold)
+                {
+					if (fontDialog.Font.Italic)
+                    {
+						textbox.FontWeight = FontWeights.Bold;
+						textbox.FontStyle = FontStyles.Italic;
+					}
+					else
+                    {
+						textbox.FontStyle = FontStyles.Normal;
+						textbox.FontWeight = FontWeights.Bold;
+                    }	
+                } 
+				else if (fontDialog.Font.Italic)
+                {
+					textbox.FontStyle = FontStyles.Italic;
+					textbox.FontWeight = FontWeights.Normal;
+				}
+				else if (!fontDialog.Font.Bold & !fontDialog.Font.Italic)
+                {
+					textbox.FontWeight = FontWeights.Normal;
+					textbox.FontStyle = FontStyles.Normal;
+				}
+				else
+                {
+					textbox.FontWeight = FontWeights.Bold;
+					textbox.FontStyle = FontStyles.Italic;
+				}
             }
 		}
 

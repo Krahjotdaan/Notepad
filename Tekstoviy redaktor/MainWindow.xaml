@@ -45,7 +45,7 @@
             <MenuItem x:Name="about_program" Header="О программе" FontSize="14" Height="18" FontFamily="Microsoft Sans Serif" Click="about_program_Click"/>
         </Menu>
         <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-        <TextBox x:Name="textbox" Margin="10,24,10,0" TextWrapping="Wrap" Height="410" VerticalAlignment="Top" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16"/>
+        <TextBox x:Name="textbox" Margin="10,24,10,0" TextWrapping="Wrap" Height="410" VerticalAlignment="Top" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}"/>
         <Separator Margin="0,18,0,0" Height="1                    " VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
     </Grid>
 </Window>
