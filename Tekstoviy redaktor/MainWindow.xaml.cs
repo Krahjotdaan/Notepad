@@ -1,26 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
-using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Tekstoviy_redaktor
 {
-	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		string Filename = null;
@@ -28,6 +15,7 @@ namespace Tekstoviy_redaktor
 		public MainWindow()
 		{
 			InitializeComponent();
+			digit_bar.Text = "1";
 		}
 
 		private void new_document_Click(object sender, RoutedEventArgs e)
@@ -194,11 +182,6 @@ namespace Tekstoviy_redaktor
 
 		}
 
-		private void go_to_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
 		private void highlight_all_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.SelectAll();
@@ -223,6 +206,7 @@ namespace Tekstoviy_redaktor
 				string fontfamily = fontDialog.Font.FontFamily.ToString();
                 textbox.FontFamily = new FontFamily(fontfamily);	
 				textbox.FontSize = fontDialog.Font.Size;
+				digit_bar.FontSize = fontDialog.Font.Size;
 				
 				if (fontDialog.Font.Bold)
                 {
@@ -275,5 +259,32 @@ namespace Tekstoviy_redaktor
 			Window1 about_program = new Window1();
 			about_program.Show();
 		}
-	}
+
+        private void textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+			int strs = textbox.LineCount - 1;
+			int s = 2;
+			digit_bar.Text = "1";
+			for (int i = 0; i < strs; i++)
+            {
+				digit_bar.Text += "\n" + s.ToString();
+				s++;
+            }
+			digit_bar.ScrollToEnd();
+        }
+
+        private void textbox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+			if (e.Delta > 0)
+            {
+				digit_bar.ScrollToVerticalOffset(digit_bar.VerticalOffset - 54);
+				textbox.ScrollToVerticalOffset(textbox.VerticalOffset - 54);
+            }	
+			else if (e.Delta < 0)
+            {
+				digit_bar.ScrollToVerticalOffset(digit_bar.VerticalOffset + 54);
+				textbox.ScrollToVerticalOffset(textbox.VerticalOffset + 54);
+			}
+        }
+    }
 }
