@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.IO;
-using Microsoft.Win32;
-using System.Runtime.InteropServices;
 
 namespace Tekstoviy_redaktor
 {
@@ -199,7 +198,11 @@ namespace Tekstoviy_redaktor
 		private void font_style_Click(object sender, RoutedEventArgs e)
 		{
             System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+			//fontDialog.Font = new System.Drawing.Font(textbox.FontFamily.ToString(), (float)textbox.FontSize);
 			fontDialog.ShowEffects = false;
+			fontDialog.MaxSize = 48;
+			
+			//textbox.Text += "\n" + textbox.FontFamily.ToString() + "\n" + fontDialog.Font.FontFamily.ToString();
 
 			if (fontDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
@@ -271,7 +274,27 @@ namespace Tekstoviy_redaktor
 				s++;
             }
 			digit_bar.ScrollToEnd();
-        }
+			int row = 1;
+            int tmp = -1;
+
+			for (int i = 0; i <= textbox.SelectionStart; i++)
+            {
+				try
+				{
+					if (textbox.Text[i] == '\n')
+					{
+						row++;
+						tmp = i;
+					}
+				}
+				catch (IndexOutOfRangeException) {
+					break;
+				}
+
+			}
+            int col = textbox.SelectionStart - tmp;
+            curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
+		}
 
         private void textbox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
@@ -286,5 +309,58 @@ namespace Tekstoviy_redaktor
 				textbox.ScrollToVerticalOffset(textbox.VerticalOffset + 54);
 			}
         }
+
+        private void textbox_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+			int row = 1;
+			int tmp = -1;
+
+			for (int i = 0; i <= textbox.SelectionStart; i++)
+			{
+				try
+				{
+					if (textbox.Text[i] == '\n')
+					{
+						row++;
+						tmp = i;
+					}
+				}
+				catch (IndexOutOfRangeException)
+				{
+					break;
+				}
+
+			}
+			int col = textbox.SelectionStart - tmp;
+			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
+		}
+
+        private void textbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+			if (e.Key == System.Windows.Input.Key.Left || e.Key == System.Windows.Input.Key.Right)
+			{
+				int row = 1;
+				int tmp = -1;
+
+				for (int i = 0; i <= textbox.SelectionStart; i++)
+				{
+					try
+					{
+						if (textbox.Text[i] == '\n')
+						{
+							row++;
+							tmp = i;
+						}
+					}
+					catch (IndexOutOfRangeException)
+					{
+						break;
+					}
+
+				}
+				int col = textbox.SelectionStart - tmp;
+				curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
+			}
+		}
     }
 }
