@@ -54,9 +54,10 @@
         <ComboBox x:Name="languages" Margin="0,0,71,4" HorizontalAlignment="Right" Width="218" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
             <ComboBoxItem x:Name="text_file" Content="Текстовый файл (txt)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="batch" Content="Batch (bat)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="binary" Content="Binary (bin)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="c" Content="C (c)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="c__" Content="C++ (cpp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="chead" Content="Заголовочный файл C (h)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="c__head" Content="Заголовочный файл C++ (hpp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="c_" Content="C# (cs)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="cmake" Content="CMake (cmake)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="css" Content="CSS (css)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
