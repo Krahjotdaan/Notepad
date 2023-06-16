@@ -51,47 +51,47 @@
         <Separator Margin="0,18,0,0" Height="1                    " VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         <Separator Margin="0,0,0,28" Height="5" VerticalAlignment="Bottom"/>
         <Label x:Name="encode" Content="UTF-8" Margin="0,0,10,4" FontFamily="Microsoft Sans Serif" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="56" Height="24" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="languages" Margin="0,0,71,4" HorizontalAlignment="Right" Width="218" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
-            <ComboBoxItem x:Name="text_file" Content="Текстовый файл (txt)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="batch" Content="Batch (bat)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="c" Content="C (c)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="c__" Content="C++ (cpp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="chead" Content="Заголовочный файл C (h)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="c__head" Content="Заголовочный файл C++ (hpp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="c_" Content="C# (cs)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="cmake" Content="CMake (cmake)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="css" Content="CSS (css)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="diff" Content="Diff (diff)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <ComboBox x:Name="languages" Margin="0,0,71,4" HorizontalAlignment="Right" Width="200" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
+            <ComboBoxItem x:Name="text_file" Content="Текстовый файл" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="batch" Content="Batch" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="c" Content="C" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="c__" Content="C++" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="chead" Content="Заголовочный файл C" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="c__head" Content="Заголовочный файл C++" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="c_" Content="C#" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="cmake" Content="CMake" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="css" Content="CSS" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="diff" Content="Diff" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="docker" Content="Docker" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="f_" Content="F# (fsharp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="go" Content="Golang (go)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="groovy" Content="Groovy (groovy)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="html" Content="HTML (html)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="ini" Content="Ini (ini)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="java" Content="Java (java)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="js" Content="JavaScrips (js)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="json" Content="JSON (json)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="log" Content="Log (log)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="lua" Content="Lua (lua)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="makefile" Content="Makefile (makefile)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="objc" Content="Objective-C (objective-c)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="objcpp" Content="Objective-C++ (objective-cpp)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="perl" Content="Perl (perl)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="php" Content="PHP (php)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="powsh" Content="PowerShell (powershell)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="props" Content="Properties (properties)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="python" Content="Python (py)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="r" Content="R (r)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="ruby" Content="Ruby (ruby)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="rust" Content="Rust (rust)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="bash" Content="Shell Script (sh)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="sql" Content="SQL (sql)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="swift" Content="Swift (swift)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="toml" Content="Toml (toml)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="ts" Content="TypeScript (typescript)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="vb" Content="Visial Basic (vb)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="xml" Content="XML (xml)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-            <ComboBoxItem x:Name="yaml" Content="YAML (yaml)" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="f_" Content="F#" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="go" Content="Golang" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="groovy" Content="Groovy" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="html" Content="HTML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="ini" Content="Ini" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="java" Content="Java" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="js" Content="JavaScrips" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="json" Content="JSON" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="log" Content="Log" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="lua" Content="Lua" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="makefile" Content="Makefile" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="objc" Content="Objective-C" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="objcpp" Content="Objective-C++" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="perl" Content="Perl" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="php" Content="PHP" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="powsh" Content="PowerShell" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="props" Content="Properties" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="python" Content="Python" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="r" Content="R" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="ruby" Content="Ruby" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="rust" Content="Rust" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="bash" Content="Shell Script" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="sql" Content="SQL" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="swift" Content="Swift" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="toml" Content="Toml" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="ts" Content="TypeScript" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="vb" Content="Visial Basic" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="xml" Content="XML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBoxItem x:Name="yaml" Content="YAML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         </ComboBox>
         <Label x:Name="curs_position" Content="Стр: 1; Стлб: 1; Поз: 1" HorizontalAlignment="Left" Margin="10,0,0,0" Height="28" VerticalAlignment="Bottom" Width="390" FontFamily="Microsoft Sans Serif" FontSize="14"/>
     </Grid>

@@ -11,48 +11,48 @@ namespace Tekstoviy_redaktor
 	public partial class MainWindow : Window
 	{
 		string Filename = null;
-		Dictionary<string, string> langs = new Dictionary<string, string>()
+        readonly Dictionary<string, string> langs = new Dictionary<string, string>()
 		{
-			{"Текстовый файл (txt)", ".txt"},
-			{"Batch (bat)", ".bat"},
-			{"C (c)", ".c"},
-			{"C++ (cpp)", ".cpp"},
-			{"Заголовочный файл C (h)", ".h"},
-			{"Заголовочный файл C++ (hpp)", ".hpp"},
-			{"C# (cs)", ".cs"},
-			{"CMake (cmake)", ".cmake"},
-			{"CSS (css)", ".css"},
-			{"Diff (diff)", ".diff"},
-			{"Docker", ".dockerfile"},
-			{"F# (fsharp)", ".fs"},
-			{"Golang (go)", ".go"},
-			{"Groovy (groovy)", ".groovy"},
-			{"HTML (html)", ".html"},
-			{"Ini (ini)", ".ini"},
-			{"Java (java)", ".java"},
-			{"JavaScrips (js)", ".js"},
-			{"JSON (json)", ".json"},
-			{"Log (log)", ".log"},
-			{"Lua (lua)", ".lua"},
-			{"Makefile (makefile)", ".mak"},
-			{"Objective-C (objective-c)", ".m"},
-			{"Objective-C++ (objective-cpp)", ".mm"},
-			{"Perl (perl)", ".pl"},
-			{"PHP (php)", ".php"},
-			{"PowerShell (powershell)", ".ps1"},
-			{"Properties (properties)", ".conf"},
-			{"Python (py)", ".py"},
-			{"R (r)", ".r"},
-			{"Ruby (ruby)", ".rb"},
-			{"Rust (rust)", ".rs"},
-			{"Shell Script (sh)", ".sh"},
-			{"SQL (sql)", ".sql"},
-			{"Swift (swift)", ".swift"},
-			{"Toml (toml)", ".toml"},
-			{"TypeScript (typescript)", ".ts"},
-			{"Visial Basic (vb)", ".vb"},
-			{"XML (xml)", ".xml"},
-			{"YAML (yaml)", ".yml"}
+			{"Текстовый файл", "*.txt"},
+			{"Batch", "*.bat"},
+			{"C", "*.c"},
+			{"C++", "*.cpp"},
+			{"Заголовочный файл C", "*.h"},
+			{"Заголовочный файл C++", "*.hpp"},
+			{"C#", "*.cs"},
+			{"CMake", "*.cmake"},
+			{"CSS", "*.css"},
+			{"Diff", "*.diff"},
+			{"Docker", "*.dockerfile"},
+			{"F#", "*.fs"},
+			{"Golang", "*.go"},
+			{"Groovy", "*.groovy"},
+			{"HTML", "*.html"},
+			{"Ini", "*.ini"},
+			{"Java", "*.java"},
+			{"JavaScript", "*.js"},
+			{"JSON", "*.json"},
+			{"Log", "*.log"},
+			{"Lua", "*.lua"},
+			{"Makefile", "*.mak"},
+			{"Objective-C", "*.m"},
+			{"Objective-C++", "*.mm"},
+			{"Perl", "*.pl"},
+			{"PHP", "*.php"},
+			{"PowerShell", "*.ps1"},
+			{"Properties", "*.conf"},
+			{"Python", "*.py"},
+			{"R", "*.r"},
+			{"Ruby", "*.rb"},
+			{"Rust", "*.rs"},
+			{"Shell Script", "*.sh"},
+			{"SQL", "*.sql"},
+			{"Swift", "*.swift"},
+			{"Toml", "*.toml"},
+			{"TypeScript", "*.ts"},
+			{"Visial Basic", "*.vb"},
+			{"XML", "*.xml"},
+			{"YAML", "*.yml"}
 		};
 		public MainWindow()
 		{
@@ -106,6 +106,14 @@ namespace Tekstoviy_redaktor
 			{
 				Filename = openFileDialog.FileName;
 				textbox.Text = File.ReadAllText(openFileDialog.FileName);
+				var tmp = openFileDialog.Filter.Split('|');
+				for (int i = 0; i < tmp.Length; i++)
+                {
+					if (tmp[i] == Path.GetExtension(Filename))
+                    {
+						languages.Text = tmp[i - 1];
+                    }
+                }
 			}
 		}
 
@@ -115,23 +123,26 @@ namespace Tekstoviy_redaktor
 			{
 				TextWriter textWriter = new StreamWriter(@Filename);
 				textWriter.Write(textbox.Text);
-				textWriter.Close();
 			}
 			else
 			{
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
+				saveFileDialog.CreatePrompt = true;
+				saveFileDialog.OverwritePrompt = true;
 				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
 				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
 
+				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
+				saveFileDialog.FilterIndex = selected_lang + 1;
+
 				if (saveFileDialog.ShowDialog() == true)
 				{
 					Filename = saveFileDialog.FileName;
 					TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
 					textWriter.Write(textbox.Text);
-					textWriter.Close();
 				}
 			}
 		}
@@ -139,18 +150,22 @@ namespace Tekstoviy_redaktor
 		private void save_as_Click(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			saveFileDialog.CreatePrompt = true;
+			saveFileDialog.OverwritePrompt = true;
 			saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
 				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
 
+			int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
+			saveFileDialog.FilterIndex = selected_lang + 1;
+
 			if (saveFileDialog.ShowDialog() == true)
 			{
 				Filename = saveFileDialog.FileName;
 				TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
 				textWriter.Write(textbox.Text);
-				textWriter.Close();
 			}
 		}
 
@@ -176,24 +191,29 @@ namespace Tekstoviy_redaktor
 			{
 				TextWriter textWriter = new StreamWriter(@Filename);
 				textWriter.Write(textbox.Text);
-				textWriter.Close();
+                textWriter.Close();
 				Close();
 			}
 			else
 			{
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
+				saveFileDialog.CreatePrompt = true;
+				saveFileDialog.OverwritePrompt = true;
 				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
 				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
 
+				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
+				saveFileDialog.FilterIndex = selected_lang + 1;
+
 				if (saveFileDialog.ShowDialog() == true)
 				{
 					Filename = saveFileDialog.FileName;
 					TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
 					textWriter.Write(textbox.Text);
-					textWriter.Close();
+                    textWriter.Close();
 				}
 				Close();
 			}
