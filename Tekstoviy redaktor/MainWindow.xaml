@@ -44,14 +44,34 @@
             <MenuItem x:Name="about_program" Header="О программе" FontSize="14" Height="18" FontFamily="Microsoft Sans Serif" Click="about_program_Click"/>
         </Menu>
         <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <Grid x:Name="mainview" Margin="0,18,0,29">
 
-        <TextBox x:Name="textbox" Margin="40,18,0,30" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="textbox_PreviewKeyDown"/>
-        <TextBox x:Name="digit_bar" Margin="0,19,0,30" TextWrapping="Wrap" BorderThickness="0,0,0,0" ClipToBounds="True" FontFamily="Microsoft Sans Serif" FontSize="16" IsReadOnly="True" IsUndoEnabled="False" TextAlignment="Center" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Left" Width="40" Padding="0,5,0,0" Background="#FFF0F0F0" Foreground="#FF969696"/>
+            <TextBox x:Name="textbox" Margin="40,0,0,0" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="textbox_PreviewKeyDown" RenderTransformOrigin="0.5,0.5">
+                <TextBox.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBox.LayoutTransform>
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <TextBox x:Name="digit_bar" Margin="0,1,0,1" TextWrapping="Wrap" BorderThickness="0,0,0,0" ClipToBounds="True" FontFamily="Microsoft Sans Serif" FontSize="16" IsReadOnly="True" IsUndoEnabled="False" TextAlignment="Center" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Left" Width="40" Padding="0,5,0,0" Background="#FFF0F0F0" Foreground="#FF969696"/>
+
+        </Grid>
 
         <Separator Margin="0,18,0,0" Height="1                    " VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         <Separator Margin="0,0,0,28" Height="5" VerticalAlignment="Bottom"/>
-        <Label x:Name="encode" Content="UTF-8" Margin="0,0,10,4" FontFamily="Microsoft Sans Serif" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="56" Height="24" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="languages" Margin="0,0,71,4" HorizontalAlignment="Right" Width="200" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
+        <Label x:Name="encode" Content="UTF-8" FontFamily="Microsoft Sans Serif" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="56" Height="30" VerticalAlignment="Bottom" BorderThickness="1,0,0,0" ClipToBounds="True" BorderBrush="#FFACACAC" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="languages" Margin="0,0,61,4" HorizontalAlignment="Right" Width="200" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
             <ComboBoxItem x:Name="text_file" Content="Текстовый файл" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="batch" Content="Batch" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="c" Content="C" FontFamily="Microsoft Sans Serif" FontSize="14"/>
@@ -94,5 +114,6 @@
             <ComboBoxItem x:Name="yaml" Content="YAML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         </ComboBox>
         <Label x:Name="curs_position" Content="Стр: 1; Стлб: 1; Поз: 1" HorizontalAlignment="Left" Margin="10,0,0,0" Height="28" VerticalAlignment="Bottom" Width="390" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <Label x:Name="scale1" Content="100%" Margin="0,0,266,0" FontFamily="Microsoft Sans Serif" FontSize="14" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="49" BorderThickness="1,0,1,0" BorderBrush="#FFACACAE" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

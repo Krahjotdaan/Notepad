@@ -11,48 +11,50 @@ namespace Tekstoviy_redaktor
 	public partial class MainWindow : Window
 	{
 		string Filename = null;
+		double scalex = 1;
+		double scaley = 1;
         readonly Dictionary<string, string> langs = new Dictionary<string, string>()
 		{
-			{"Текстовый файл", "*.txt"},
-			{"Batch", "*.bat"},
-			{"C", "*.c"},
-			{"C++", "*.cpp"},
-			{"Заголовочный файл C", "*.h"},
-			{"Заголовочный файл C++", "*.hpp"},
-			{"C#", "*.cs"},
-			{"CMake", "*.cmake"},
-			{"CSS", "*.css"},
-			{"Diff", "*.diff"},
-			{"Docker", "*.dockerfile"},
-			{"F#", "*.fs"},
-			{"Golang", "*.go"},
-			{"Groovy", "*.groovy"},
-			{"HTML", "*.html"},
-			{"Ini", "*.ini"},
-			{"Java", "*.java"},
-			{"JavaScript", "*.js"},
-			{"JSON", "*.json"},
-			{"Log", "*.log"},
-			{"Lua", "*.lua"},
-			{"Makefile", "*.mak"},
-			{"Objective-C", "*.m"},
-			{"Objective-C++", "*.mm"},
-			{"Perl", "*.pl"},
-			{"PHP", "*.php"},
-			{"PowerShell", "*.ps1"},
-			{"Properties", "*.conf"},
-			{"Python", "*.py"},
-			{"R", "*.r"},
-			{"Ruby", "*.rb"},
-			{"Rust", "*.rs"},
-			{"Shell Script", "*.sh"},
-			{"SQL", "*.sql"},
-			{"Swift", "*.swift"},
-			{"Toml", "*.toml"},
-			{"TypeScript", "*.ts"},
-			{"Visial Basic", "*.vb"},
-			{"XML", "*.xml"},
-			{"YAML", "*.yml"}
+			{".txt", "Текстовый файл"},
+			{".bat", "Batch"},
+			{".c" , "C"},
+			{".cpp" , "C++"},
+			{".h" , "Заголовочный файл C"},
+			{".hpp" , "Заголовочный файл C++"},
+			{".cs" , "C#"},
+			{".cmake" , "CMake"},
+			{".css" , "CSS"},
+			{".diff" , "Diff"},
+			{".dockerfile" , "Docker"},
+			{".fs" , "F#"},
+			{".go" , "Golang"},
+			{".groovy" , "Groovy"},
+			{".html" , "HTML"},
+			{".ini" , "Ini"},
+			{".java" , "Java"},
+			{".js" , "JavaScript"},
+			{".json" , "JSON"},
+			{".log" , "Log"},
+			{".lua" , "Lua"},
+			{".mak" , "Makefile"},
+			{".m" , "Objective-C"},
+			{".mm" , "Objective-C++"},
+			{".pl" , "Perl"},
+			{".php" , "PHP"},
+			{".ps1" , "PowerShell"},
+			{".conf" , "Properties"},
+			{".py" , "Python"},
+			{".r" , "R"},
+			{".rb" , "Ruby"},
+			{".rs" , "Rust"},
+			{".sh" , "Shell Script"},
+			{".sql" , "SQL"},
+			{".swift" , "Swift"},
+			{".toml" , "Toml"},
+			{".ts" , "TypeScript"},
+			{".vb" , "Visial Basic"},
+			{".xml" , "XML"},
+			{".yml" , "YAML"}
 		};
 		public MainWindow()
 		{
@@ -96,6 +98,7 @@ namespace Tekstoviy_redaktor
 		private void open_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
+			openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
 			openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
@@ -106,14 +109,7 @@ namespace Tekstoviy_redaktor
 			{
 				Filename = openFileDialog.FileName;
 				textbox.Text = File.ReadAllText(openFileDialog.FileName);
-				var tmp = openFileDialog.Filter.Split('|');
-				for (int i = 0; i < tmp.Length; i++)
-                {
-					if (tmp[i] == Path.GetExtension(Filename))
-                    {
-						languages.Text = tmp[i - 1];
-                    }
-                }
+				languages.Text = langs[Path.GetExtension(Filename)];
 			}
 		}
 
@@ -129,6 +125,7 @@ namespace Tekstoviy_redaktor
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
 				saveFileDialog.CreatePrompt = true;
 				saveFileDialog.OverwritePrompt = true;
+				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
@@ -152,6 +149,7 @@ namespace Tekstoviy_redaktor
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.CreatePrompt = true;
 			saveFileDialog.OverwritePrompt = true;
+			saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 			saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
@@ -199,6 +197,7 @@ namespace Tekstoviy_redaktor
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
 				saveFileDialog.CreatePrompt = true;
 				saveFileDialog.OverwritePrompt = true;
+				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
@@ -323,17 +322,32 @@ namespace Tekstoviy_redaktor
 
 		private void increase_scale_Click(object sender, RoutedEventArgs e)
 		{
-			
+			if (scalex < 3 && scaley < 3)
+            {
+				scalex += 0.25;
+				scaley += 0.25;
+				mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+				scale1.Content = (scalex * 100).ToString() + '%';
+			}
 		}
 
 		private void decrease_scale_Click(object sender, RoutedEventArgs e)
 		{
-			
+			if (scalex > 0.25 && scaley > 0.25)
+			{
+				scalex -= 0.25;
+				scaley -= 0.25;
+				mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+				scale1.Content = (scalex * 100).ToString() + '%';
+			}
 		}
 
 		private void default_scale_Click(object sender, RoutedEventArgs e)
 		{
-			
+			scalex = 1;
+			scaley = 1;
+			mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+			scale1.Content = (scalex * 100).ToString() + '%';
 		}
 
 		private void about_program_Click(object sender, RoutedEventArgs e)
