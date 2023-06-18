@@ -8,7 +8,7 @@
         Title="О программе" Height="200" Width="450" ResizeMode="NoResize">
     <Grid>
         <Label Content="Notepad" Margin="10,-2,254,0" FontSize="18" Height="36" VerticalAlignment="Top"/>
-        <TextBox Margin="10,48,10,10" TextWrapping="Wrap" Text="Created by Ostapenko Artem with .NET Framework 4.7.2&#xA;GitHub account: https://github.com/Krahjotdaan&#xA;&#xA;&#xA;This product licensed as open-source with Apache License 2.0" FontSize="14" BorderThickness="0,0,0,0" ClipToBounds="True" HorizontalContentAlignment="Center" IsManipulationEnabled="True" IsReadOnly="True"/>
+        <TextBox Margin="10,48,10,10" TextWrapping="Wrap" Text="Created by Ostapenko Artem with .NET Framework 4.7.2&#xA;GitHub account: https://github.com/Krahjotdaan&#xA;&#xA;&#xA;This product licensed as open-source under MIT License" FontSize="14" BorderThickness="0,0,0,0" ClipToBounds="True" HorizontalContentAlignment="Center" IsManipulationEnabled="True" IsReadOnly="True"/>
         <Separator HorizontalAlignment="Left" Margin="27,39,0,0" VerticalAlignment="Top"/>
         <Separator Margin="0,31,0,0" RenderTransformOrigin="0.5,0.5" Height="3" VerticalAlignment="Top">
             <Separator.RenderTransform>

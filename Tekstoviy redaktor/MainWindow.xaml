@@ -69,7 +69,7 @@
         </Grid>
 
         <Separator Margin="0,18,0,0" Height="1                    " VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-        <Separator Margin="0,0,0,28" Height="5" VerticalAlignment="Bottom"/>
+        <Separator Margin="0,0,0,27" Height="5" VerticalAlignment="Bottom"/>
         <Label x:Name="encode" Content="UTF-8" FontFamily="Microsoft Sans Serif" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="56" Height="30" VerticalAlignment="Bottom" BorderThickness="1,0,0,0" ClipToBounds="True" BorderBrush="#FFACACAC" VerticalContentAlignment="Center"/>
         <ComboBox x:Name="languages" Margin="0,0,61,4" HorizontalAlignment="Right" Width="200" Height="22" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="14" SelectedIndex="0">
             <ComboBoxItem x:Name="text_file" Content="Текстовый файл" FontFamily="Microsoft Sans Serif" FontSize="14"/>
@@ -113,7 +113,7 @@
             <ComboBoxItem x:Name="xml" Content="XML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
             <ComboBoxItem x:Name="yaml" Content="YAML" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         </ComboBox>
-        <Label x:Name="curs_position" Content="Стр: 1; Стлб: 1; Поз: 1" HorizontalAlignment="Left" Margin="10,0,0,0" Height="28" VerticalAlignment="Bottom" Width="390" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <Label x:Name="curs_position" Content="Стр: 1; Стлб: 1; Поз: 1" HorizontalAlignment="Left" Height="30" VerticalAlignment="Bottom" Width="390" FontFamily="Microsoft Sans Serif" FontSize="14" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
         <Label x:Name="scale1" Content="100%" Margin="0,0,266,0" FontFamily="Microsoft Sans Serif" FontSize="14" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="49" BorderThickness="1,0,1,0" BorderBrush="#FFACACAE" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

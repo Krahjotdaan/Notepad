@@ -99,11 +99,11 @@ namespace Tekstoviy_redaktor
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
-			openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
-				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
+			openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
-				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
+				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 			if (openFileDialog.ShowDialog() == true)
 			{
@@ -126,11 +126,11 @@ namespace Tekstoviy_redaktor
 				saveFileDialog.CreatePrompt = true;
 				saveFileDialog.OverwritePrompt = true;
 				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
-				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
-				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
+				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
-				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
+				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 				saveFileDialog.FilterIndex = selected_lang + 1;
@@ -150,11 +150,11 @@ namespace Tekstoviy_redaktor
 			saveFileDialog.CreatePrompt = true;
 			saveFileDialog.OverwritePrompt = true;
 			saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
-			saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
-				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
-				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
-				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
+			saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak, *.mk|Objective-C |*.m" +
+				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 			int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 			saveFileDialog.FilterIndex = selected_lang + 1;
@@ -198,11 +198,11 @@ namespace Tekstoviy_redaktor
 				saveFileDialog.CreatePrompt = true;
 				saveFileDialog.OverwritePrompt = true;
 				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
-				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
-				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy|HTML |*.html" +
+				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
-				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml|Все файлы |*.*";
+				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 				saveFileDialog.FilterIndex = selected_lang + 1;
@@ -353,7 +353,11 @@ namespace Tekstoviy_redaktor
 		private void about_program_Click(object sender, RoutedEventArgs e)
 		{
 			Window1 about_program = new Window1();
-			about_program.Show();
+			if (about_program.ShowDialog() == true)
+            {
+				about_program.Show();
+            }
+			
 		}
 
         private void textbox_TextChanged(object sender, TextChangedEventArgs e)
