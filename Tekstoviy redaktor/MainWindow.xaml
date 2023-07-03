@@ -1,4 +1,4 @@
-﻿<Window x:Class="Tekstoviy_redaktor.MainWindow"
+﻿<Window x:Name="window" x:Class="Tekstoviy_redaktor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,44 +9,44 @@
     <Grid>
         <Menu x:Name="menu" Height="18" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" Background="White" FontSize="14">
             <MenuItem x:Name="file" Header="Файл" FontSize="14" FontFamily="Microsoft Sans Serif" Height="18">
-                <MenuItem x:Name="new_document" Header="Создать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="new_document_Click"/>
-                <MenuItem x:Name="new_window" Header="Новое окно" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="new_window_Click"/>
-                <MenuItem x:Name="open" Header="Открыть" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="open_Click"/>
-                <MenuItem x:Name="save" Header="Сохранить" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="save_Click"/>
-                <MenuItem x:Name="save_as" Header="Сохранить как" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="save_as_Click"/>
+                <MenuItem x:Name="new_document" Header="Создать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="New_document_Click"/>
+                <MenuItem x:Name="new_window" Header="Новое окно" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="New_window_Click"/>
+                <MenuItem x:Name="open" Header="Открыть" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Open_Click"/>
+                <MenuItem x:Name="save" Header="Сохранить" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Save_Click"/>
+                <MenuItem x:Name="save_as" Header="Сохранить как" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Save_as_Click"/>
                 <Separator/>
-                <MenuItem x:Name="page_settings" Header="Параметры страницы" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="page_settings_Click"/>
-                <MenuItem x:Name="printing" Header="Печать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="printing_Click"/>
+                <MenuItem x:Name="page_settings" Header="Параметры страницы" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Page_settings_Click"/>
+                <MenuItem x:Name="printing" Header="Печать" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Printing_Click"/>
                 <Separator/>
-                <MenuItem x:Name="exit" Header="Выход" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="exit_Click"/>
+                <MenuItem x:Name="exit" Header="Выход" Background="#00F0F0F0" BorderBrush="#00F0F0F0" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem x:Name="editing" Header="Правка" FontSize="14" FontFamily="Microsoft Sans Serif">
-                <MenuItem x:Name="cancel" Header="Отменить" Click="cancel_Click"/>
-                <MenuItem x:Name="redo" Header="Вернуть" Click="redo_Click"/>
+                <MenuItem x:Name="cancel" Header="Отменить" Click="Cancel_Click"/>
+                <MenuItem x:Name="redo" Header="Вернуть" Click="Redo_Click"/>
                 <Separator/>
-                <MenuItem x:Name="cut" Header="Вырезать" Click="cut_Click"/>
-                <MenuItem x:Name="copy" Header="Копировать" Click="copy_Click"/>
-                <MenuItem x:Name="insert" Header="Вставить" Click="insert_Click"/>
-                <MenuItem x:Name="delete" Header="Удалить" Click="delete_Click"/>
+                <MenuItem x:Name="cut" Header="Вырезать" Click="Cut_Click"/>
+                <MenuItem x:Name="copy" Header="Копировать" Click="Copy_Click"/>
+                <MenuItem x:Name="insert" Header="Вставить" Click="Insert_Click"/>
+                <MenuItem x:Name="delete" Header="Удалить" Click="Delete_Click"/>
                 <Separator/>
-                <MenuItem x:Name="find" Header="Найти" Click="find_Click"/>
-                <MenuItem x:Name="replace" Header="Заменить" Click="replace_Click"/>
+                <MenuItem x:Name="find" Header="Найти" Click="Find_Click"/>
+                <MenuItem x:Name="replace" Header="Заменить" Click="Replace_Click"/>
                 <Separator/>
-                <MenuItem x:Name="highlight_all" Header="Выделить всё" Click="highlight_all_Click"/>
-                <MenuItem x:Name="datetime" Header="Дата и время" Click="datetime_Click"/>
+                <MenuItem x:Name="highlight_all" Header="Выделить всё" Click="Highlight_all_Click"/>
+                <MenuItem x:Name="datetime" Header="Дата и время" Click="Datetime_Click"/>
             </MenuItem>
-            <MenuItem x:Name="font_style" Header="Шрифт" FontSize="14" FontFamily="Microsoft Sans Serif" Click="font_style_Click"/>
+            <MenuItem x:Name="font_style" Header="Шрифт" FontSize="14" FontFamily="Microsoft Sans Serif" Click="Font_style_Click"/>
             <MenuItem x:Name="scale" Header="Масштаб" FontSize="14" FontFamily="Microsoft Sans Serif">
-                <MenuItem x:Name="increase_scale" Header="Увеличить" Click="increase_scale_Click"/>
-                <MenuItem x:Name="decrease_scale" Header="Уменьшить" Click="decrease_scale_Click"/>
-                <MenuItem x:Name="default_scale" Header="По умолчанию" Click="default_scale_Click"/>
+                <MenuItem x:Name="increase_scale" Header="Увеличить" Click="Increase_scale_Click"/>
+                <MenuItem x:Name="decrease_scale" Header="Уменьшить" Click="Decrease_scale_Click"/>
+                <MenuItem x:Name="default_scale" Header="По умолчанию" Click="Default_scale_Click"/>
             </MenuItem>
-            <MenuItem x:Name="about_program" Header="О программе" FontSize="14" Height="18" FontFamily="Microsoft Sans Serif" Click="about_program_Click"/>
+            <MenuItem x:Name="about_program" Header="О программе" FontSize="14" Height="18" FontFamily="Microsoft Sans Serif" Click="About_program_Click"/>
         </Menu>
         <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         <Grid x:Name="mainview" Margin="0,18,0,29">
 
-            <TextBox x:Name="textbox" Margin="40,0,0,0" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="textbox_PreviewKeyDown" RenderTransformOrigin="0.5,0.5">
+            <TextBox x:Name="textbox" Margin="40,0,0,0" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="Textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="Textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="Textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="Textbox_PreviewKeyDown" RenderTransformOrigin="0.5,0.5">
                 <TextBox.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>

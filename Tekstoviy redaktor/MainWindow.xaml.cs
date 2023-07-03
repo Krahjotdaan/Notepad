@@ -62,7 +62,7 @@ namespace Tekstoviy_redaktor
 			digit_bar.Text = "1";
 		}
 
-		private void new_document_Click(object sender, RoutedEventArgs e)
+		private void New_document_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
 			{
@@ -75,7 +75,11 @@ namespace Tekstoviy_redaktor
 			else
 			{
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
-				saveFileDialog.Filter = "Текстовые файлы |*.txt|Все файлы |*.*";
+				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
+				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 				if (saveFileDialog.ShowDialog() == true)
 				{
@@ -89,48 +93,75 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
-		private void new_window_Click(object sender, RoutedEventArgs e)
+		private void New_window_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow window = new MainWindow();
 			window.Show();
 		}
 
-		private void open_Click(object sender, RoutedEventArgs e)
+		private void Open_Click(object sender, RoutedEventArgs e)
 		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
+			OpenFileDialog openFileDialog = new OpenFileDialog();	
 			openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
-
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+            openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
+			
 			if (openFileDialog.ShowDialog() == true)
 			{
 				Filename = openFileDialog.FileName;
 				textbox.Text = File.ReadAllText(openFileDialog.FileName);
-				languages.Text = langs[Path.GetExtension(Filename)];
+				window.Title = Filename + " - Notepad";
+				try
+                {
+					languages.Text = langs[Path.GetExtension(Filename)];
+                }
+				catch (KeyNotFoundException)
+                {
+					if (Path.GetExtension(Filename) == ".cmd")
+                    {
+						languages.Text = langs[".bat"];
+					}
+					if (Path.GetExtension(Filename) == ".jenkinsfile") {
+						languages.Text = langs[".groovy"];
+					}
+					if (Path.GetExtension(Filename) == ".properties")
+                    {
+						languages.Text = langs[".conf"];
+					}
+					if (Path.GetExtension(Filename) == ".bash")
+					{
+						languages.Text = langs[".sh"];
+					}
+					if (Path.GetExtension(Filename) == ".yaml")
+					{
+						languages.Text = langs[".yml"];
+					}
+				}		
 			}
 		}
 
-		private void save_Click(object sender, RoutedEventArgs e)
+		private void Save_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
 			{
-				TextWriter textWriter = new StreamWriter(@Filename);
+				TextWriter textWriter = new StreamWriter(Filename);
 				textWriter.Write(textbox.Text);
+				textWriter.Close();
 			}
 			else
 			{
 				SaveFileDialog saveFileDialog = new SaveFileDialog();
 				saveFileDialog.CreatePrompt = true;
 				saveFileDialog.OverwritePrompt = true;
-				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 				saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+				saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 
 				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 				saveFileDialog.FilterIndex = selected_lang + 1;
@@ -138,23 +169,25 @@ namespace Tekstoviy_redaktor
 				if (saveFileDialog.ShowDialog() == true)
 				{
 					Filename = saveFileDialog.FileName;
-					TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
+					TextWriter textWriter = new StreamWriter(Filename);
 					textWriter.Write(textbox.Text);
+					textWriter.Close();
+					window.Title = Filename + " - Notepad";
 				}
 			}
 		}
 
-		private void save_as_Click(object sender, RoutedEventArgs e)
+		private void Save_as_Click(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.CreatePrompt = true;
 			saveFileDialog.OverwritePrompt = true;
-			saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 			saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak, *.mk|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+			saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
 
 			int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 			saveFileDialog.FilterIndex = selected_lang + 1;
@@ -162,32 +195,34 @@ namespace Tekstoviy_redaktor
 			if (saveFileDialog.ShowDialog() == true)
 			{
 				Filename = saveFileDialog.FileName;
-				TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
+				TextWriter textWriter = new StreamWriter(Filename);
 				textWriter.Write(textbox.Text);
+				textWriter.Close();
+				window.Title = Filename + " - Notepad";
 			}
 		}
 
-		private void page_settings_Click(object sender, RoutedEventArgs e)
+		private void Page_settings_Click(object sender, RoutedEventArgs e)
 		{
 			System.Windows.Forms.PageSetupDialog pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
 			pageSetupDialog.PageSettings = new System.Drawing.Printing.PageSettings();
 
 			pageSetupDialog.ShowNetwork = false;
 
-			System.Windows.Forms.DialogResult result = pageSetupDialog.ShowDialog();
+			// System.Windows.Forms.DialogResult result = pageSetupDialog.ShowDialog();
 		}
 
-		private void printing_Click(object sender, RoutedEventArgs e)
+		private void Printing_Click(object sender, RoutedEventArgs e)
 		{
 			PrintDialog printDialog = new PrintDialog();
 			printDialog.ShowDialog();
 		}
 
-		private void exit_Click(object sender, RoutedEventArgs e)
+		private void Exit_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
 			{
-				TextWriter textWriter = new StreamWriter(@Filename);
+				TextWriter textWriter = new StreamWriter(Filename);
 				textWriter.Write(textbox.Text);
                 textWriter.Close();
 				Close();
@@ -202,7 +237,7 @@ namespace Tekstoviy_redaktor
 				"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
-				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visial Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
 
 				int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
 				saveFileDialog.FilterIndex = selected_lang + 1;
@@ -210,7 +245,7 @@ namespace Tekstoviy_redaktor
 				if (saveFileDialog.ShowDialog() == true)
 				{
 					Filename = saveFileDialog.FileName;
-					TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
+					TextWriter textWriter = new StreamWriter(saveFileDialog.FileName);
 					textWriter.Write(textbox.Text);
                     textWriter.Close();
 				}
@@ -218,53 +253,53 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
-		private void cancel_Click(object sender, RoutedEventArgs e)
+		private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Undo();
 		}
 
-		private void redo_Click(object sender, RoutedEventArgs e)
+		private void Redo_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Redo();
 		}
 
-		private void cut_Click(object sender, RoutedEventArgs e)
+		private void Cut_Click(object sender, RoutedEventArgs e)
 		{
 			Clipboard.Clear();
 			textbox.Cut();
 		}
 
-		private void copy_Click(object sender, RoutedEventArgs e)
+		private void Copy_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Copy();
 		}
 
-		private void insert_Click(object sender, RoutedEventArgs e)
+		private void Insert_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Paste();
 		}
 
-		private void delete_Click(object sender, RoutedEventArgs e)
+		private void Delete_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.SelectedText = "";
 		}
 
-		private void find_Click(object sender, RoutedEventArgs e)
+		private void Find_Click(object sender, RoutedEventArgs e)
 		{
 
 		}
 
-		private void replace_Click(object sender, RoutedEventArgs e)
+		private void Replace_Click(object sender, RoutedEventArgs e)
 		{
 
 		}
 
-		private void highlight_all_Click(object sender, RoutedEventArgs e)
+		private void Highlight_all_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.SelectAll();
 		}
 
-		private void datetime_Click(object sender, RoutedEventArgs e)
+		private void Datetime_Click(object sender, RoutedEventArgs e)
 		{
 			string tmp = Clipboard.GetText();
 			DateTime dateTime = DateTime.Now;
@@ -273,7 +308,7 @@ namespace Tekstoviy_redaktor
 			Clipboard.SetText(tmp);
 		}
 
-		private void font_style_Click(object sender, RoutedEventArgs e)
+		private void Font_style_Click(object sender, RoutedEventArgs e)
 		{
             System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
 			//fontDialog.Font = new System.Drawing.Font(textbox.FontFamily.ToString(), (float)textbox.FontSize);
@@ -320,7 +355,7 @@ namespace Tekstoviy_redaktor
             }
 		}
 
-		private void increase_scale_Click(object sender, RoutedEventArgs e)
+		private void Increase_scale_Click(object sender, RoutedEventArgs e)
 		{
 			if (scalex < 3 && scaley < 3)
             {
@@ -331,7 +366,7 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
-		private void decrease_scale_Click(object sender, RoutedEventArgs e)
+		private void Decrease_scale_Click(object sender, RoutedEventArgs e)
 		{
 			if (scalex > 0.25 && scaley > 0.25)
 			{
@@ -342,7 +377,7 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
-		private void default_scale_Click(object sender, RoutedEventArgs e)
+		private void Default_scale_Click(object sender, RoutedEventArgs e)
 		{
 			scalex = 1;
 			scaley = 1;
@@ -350,7 +385,7 @@ namespace Tekstoviy_redaktor
 			scale1.Content = (scalex * 100).ToString() + '%';
 		}
 
-		private void about_program_Click(object sender, RoutedEventArgs e)
+		private void About_program_Click(object sender, RoutedEventArgs e)
 		{
 			Window1 about_program = new Window1();
 			if (about_program.ShowDialog() == true)
@@ -360,7 +395,7 @@ namespace Tekstoviy_redaktor
 			
 		}
 
-        private void textbox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
 			int strs = textbox.LineCount - 1;
 			int s = 2;
@@ -393,7 +428,7 @@ namespace Tekstoviy_redaktor
             curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
-        private void textbox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void Textbox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
 			if (e.Delta > 0)
             {
@@ -407,7 +442,7 @@ namespace Tekstoviy_redaktor
 			}
         }
 
-        private void textbox_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Textbox_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 			int row = 1;
 			int tmp = -1;
@@ -432,7 +467,7 @@ namespace Tekstoviy_redaktor
 			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
-        private void textbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Textbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
 			if (e.Key == System.Windows.Input.Key.Left || e.Key == System.Windows.Input.Key.Right)
 			{
