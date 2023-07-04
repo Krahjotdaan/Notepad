@@ -41,12 +41,13 @@
                 <MenuItem x:Name="decrease_scale" Header="Уменьшить" Click="Decrease_scale_Click"/>
                 <MenuItem x:Name="default_scale" Header="По умолчанию" Click="Default_scale_Click"/>
             </MenuItem>
+            <MenuItem x:Name="Info" Header="Справка" Click="Info_Click"/>
             <MenuItem x:Name="about_program" Header="О программе" FontSize="14" Height="18" FontFamily="Microsoft Sans Serif" Click="About_program_Click"/>
         </Menu>
         <Separator HorizontalAlignment="Left" Margin="734,421,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         <Grid x:Name="mainview" Margin="0,18,0,29">
 
-            <TextBox x:Name="textbox" Margin="40,0,0,0" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="Textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="Textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="Textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="Textbox_PreviewKeyDown" RenderTransformOrigin="0.5,0.5">
+            <TextBox x:Name="textbox" Margin="40,0,0,0" TextWrapping="NoWrap" BorderThickness="0,0,0,0" SelectionBrush="#FFA0A0A0" FontFamily="Microsoft Sans Serif" AcceptsReturn="True" FontSize="16" FontStyle="Normal" FontWeight="Normal" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Visible" TextChanged="Textbox_TextChanged" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" PreviewMouseWheel="Textbox_PreviewMouseWheel" Padding="3,5,0,0" PreviewMouseLeftButtonUp="Textbox_PreviewMouseLeftButtonUp" PreviewKeyDown="Textbox_PreviewKeyDown" RenderTransformOrigin="0.5,0.5" KeyDown="Textbox_KeyDown" KeyUp="Textbox_KeyUp">
                 <TextBox.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>

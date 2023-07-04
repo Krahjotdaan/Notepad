@@ -1,0 +1,26 @@
+﻿<Window x:Class="Tekstoviy_redaktor.Info"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tekstoviy_redaktor"
+        mc:Ignorable="d" Height="260" Width="460" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Справка" Margin="10,-2,225,0" FontSize="18" Height="34" VerticalAlignment="Top"/>
+        <Separator Margin="0,31,0,0" RenderTransformOrigin="0.5,0.5" Height="3" VerticalAlignment="Top">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBox Margin="10,37,244,12" TextWrapping="Wrap" BorderThickness="0,0,0,0" Text="Создать - CTRL+N&#xA;Новое окно - CTRL+SHIFT+N&#xA;Открыть - CTRL+O&#xA;Сохранить - CTRL+S&#xA;Сохранить как - CTRL+SHIFT+S&#xA;Печать - CTRL+P&#xA;Отменить - CTRL+Z&#xA;Вернуть - CTRL+Y&#xD;&#xA;Вырезать - CTRL+X&#xD;&#xA;Копировать - CTRL+C&#xA;&#xA;"/>
+        <TextBox Margin="221,39,10,10" TextWrapping="Wrap" BorderThickness="0,0,0,0" Text="Вставить - CTRL+V&#xD;&#xA;Удалить - Del&#xD;&#xA;Найти - CTRL+F&#xD;&#xA;Заменить - CTRL+H&#xD;&#xA;Выделить всё - CTRL+A&#xD;&#xA;Дата и время - F5&#xD;&#xA;Увеличить масштаб - CTRL+плюс(+)&#xD;&#xA;Уменьшить масштаб - CTRL+минус(-)&#xD;&#xA;Масштаб по умолчанию - CTRL+0"/>
+    </Grid>
+</Window>

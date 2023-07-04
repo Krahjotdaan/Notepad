@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Tekstoviy_redaktor
@@ -13,7 +14,9 @@ namespace Tekstoviy_redaktor
 		string Filename = null;
 		double scalex = 1;
 		double scaley = 1;
-        readonly Dictionary<string, string> langs = new Dictionary<string, string>()
+		bool isShift = false;
+		bool isCtrl = false;
+		readonly Dictionary<string, string> langs = new Dictionary<string, string>()
 		{
 			{".txt", "Текстовый файл"},
 			{".bat", "Batch"},
@@ -60,6 +63,7 @@ namespace Tekstoviy_redaktor
 		{
 			InitializeComponent();
 			digit_bar.Text = "1";
+			textbox.SelectionStart = 0;
 		}
 
 		private void New_document_Click(object sender, RoutedEventArgs e)
@@ -265,7 +269,6 @@ namespace Tekstoviy_redaktor
 
 		private void Cut_Click(object sender, RoutedEventArgs e)
 		{
-			Clipboard.Clear();
 			textbox.Cut();
 		}
 
@@ -428,7 +431,7 @@ namespace Tekstoviy_redaktor
             curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
-        private void Textbox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void Textbox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
 			if (e.Delta > 0)
             {
@@ -442,7 +445,7 @@ namespace Tekstoviy_redaktor
 			}
         }
 
-        private void Textbox_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Textbox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 			int row = 1;
 			int tmp = -1;
@@ -467,9 +470,9 @@ namespace Tekstoviy_redaktor
 			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
-        private void Textbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-			if (e.Key == System.Windows.Input.Key.Left || e.Key == System.Windows.Input.Key.Right)
+		private void Textbox_PreviewKeyDown(object sender, KeyEventArgs e)
+		{ 
+			if (e.Key == Key.Left || e.Key == Key.Right)
 			{
 				int row = 1;
 				int tmp = -1;
@@ -488,11 +491,226 @@ namespace Tekstoviy_redaktor
 					{
 						break;
 					}
-
 				}
 				int col = textbox.SelectionStart - tmp;
 				curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 			}
+			if (e.Key == Key.F5)
+            {
+				string tmp = Clipboard.GetText();
+				DateTime dateTime = DateTime.Now;
+				Clipboard.SetText(dateTime.ToLocalTime().ToString());
+				textbox.Paste();
+				Clipboard.SetText(tmp);
+			}
+			if (isCtrl)
+            {
+				textbox.IsEnabled = false;
+				if (e.Key == Key.N && isShift == false)
+                {
+					if (Filename != null)
+					{
+						TextWriter textWriter = new StreamWriter(@Filename);
+						textWriter.Write(textbox.Text);
+						textWriter.Close();
+						textbox.Clear();
+						Filename = null;
+					}
+					else
+					{
+						SaveFileDialog saveFileDialog = new SaveFileDialog();
+						saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+						"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+						"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
+						"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+						"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+
+						if (saveFileDialog.ShowDialog() == true)
+						{
+							Filename = saveFileDialog.FileName;
+							TextWriter textWriter = new StreamWriter(@saveFileDialog.FileName);
+							textWriter.Write(textbox.Text);
+							textWriter.Close();
+							textbox.Clear();
+							Filename = null;
+						}
+					}
+				}
+				if (e.Key == Key.S && isShift == false)
+                {
+					if (Filename != null)
+					{
+						TextWriter textWriter = new StreamWriter(Filename);
+						textWriter.Write(textbox.Text);
+						textWriter.Close();
+					}
+					else
+					{
+						SaveFileDialog saveFileDialog = new SaveFileDialog();
+						saveFileDialog.CreatePrompt = true;
+						saveFileDialog.OverwritePrompt = true;
+						saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+						"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+						"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
+						"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+						"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+						saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
+
+						int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
+						saveFileDialog.FilterIndex = selected_lang + 1;
+
+						if (saveFileDialog.ShowDialog() == true)
+						{
+							Filename = saveFileDialog.FileName;
+							TextWriter textWriter = new StreamWriter(Filename);
+							textWriter.Write(textbox.Text);
+							textWriter.Close();
+							window.Title = Filename + " - Notepad";
+						}
+					}			
+				}
+				if (e.Key == Key.O && isShift == false)
+                {
+					OpenFileDialog openFileDialog = new OpenFileDialog();
+					openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+						"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+						"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
+						"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+						"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+					openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
+
+					if (openFileDialog.ShowDialog() == true)
+					{
+						Filename = openFileDialog.FileName;
+						textbox.Text = File.ReadAllText(openFileDialog.FileName);
+						window.Title = Filename + " - Notepad";
+						try
+						{
+							languages.Text = langs[Path.GetExtension(Filename)];
+						}
+						catch (KeyNotFoundException)
+						{
+							if (Path.GetExtension(Filename) == ".cmd")
+							{
+								languages.Text = langs[".bat"];
+							}
+							if (Path.GetExtension(Filename) == ".jenkinsfile")
+							{
+								languages.Text = langs[".groovy"];
+							}
+							if (Path.GetExtension(Filename) == ".properties")
+							{
+								languages.Text = langs[".conf"];
+							}
+							if (Path.GetExtension(Filename) == ".bash")
+							{
+								languages.Text = langs[".sh"];
+							}
+							if (Path.GetExtension(Filename) == ".yaml")
+							{
+								languages.Text = langs[".yml"];
+							}
+						}
+					}
+				}
+				if (e.Key == Key.P && isShift == false)
+                {
+
+                }
+				if (e.Key == Key.OemPlus && isShift == false)
+                {
+					if (scalex < 3 && scaley < 3)
+					{
+						scalex += 0.25;
+						scaley += 0.25;
+						mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+						scale1.Content = (scalex * 100).ToString() + '%';
+					}
+				}
+				if (e.Key == Key.OemMinus && isShift == false)
+                {
+					if (scalex > 0.25 && scaley > 0.25)
+					{
+						scalex -= 0.25;
+						scaley -= 0.25;
+						mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+						scale1.Content = (scalex * 100).ToString() + '%';
+					}
+				}
+				if (e.Key == Key.D0 && isShift == false)
+                {
+					scalex = 1;
+					scaley = 1;
+					mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
+					scale1.Content = (scalex * 100).ToString() + '%';
+				}
+				if (isShift)
+                {
+					if (e.Key == Key.N)
+                    {
+						MainWindow window = new MainWindow();
+						window.Show();
+					}
+					if (e.Key == Key.S)
+                    {
+						SaveFileDialog saveFileDialog = new SaveFileDialog();
+						saveFileDialog.CreatePrompt = true;
+						saveFileDialog.OverwritePrompt = true;
+						saveFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
+							"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
+							"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak, *.mk|Objective-C |*.m" +
+							"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
+							"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
+						saveFileDialog.FilterIndex = saveFileDialog.Filter.Length - 1;
+
+						int selected_lang = languages.Items.IndexOf(languages.SelectedItem);
+						saveFileDialog.FilterIndex = selected_lang + 1;
+
+						if (saveFileDialog.ShowDialog() == true)
+						{
+							Filename = saveFileDialog.FileName;
+							TextWriter textWriter = new StreamWriter(Filename);
+							textWriter.Write(textbox.Text);
+							textWriter.Close();
+							window.Title = Filename + " - Notepad";
+						}
+					}
+				}
+            }
+			textbox.IsEnabled = true;	
 		}
+
+        private void Textbox_KeyDown(object sender, KeyEventArgs e)
+        {
+			if (e.Key == Key.LeftCtrl)
+            {
+				isCtrl = true;
+            }
+			if (e.Key == Key.LeftShift)
+            {
+				isShift = true;
+            }
+        }
+
+        private void Textbox_KeyUp(object sender, KeyEventArgs e)
+        {
+			if (e.Key == Key.LeftCtrl)
+            {
+				isCtrl = false;
+            }
+			if (e.Key == Key.LeftShift)
+            {
+				isShift = false;
+            }
+        }
+
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+			Info info = new Info();
+			if (info.ShowDialog() == true)
+            {
+				info.Show();
+            }
+        }
     }
 }
