@@ -16,6 +16,7 @@ namespace Tekstoviy_redaktor
 		double scaley = 1;
 		bool isShift = false;
 		bool isCtrl = false;
+		static bool isSearchWindow = false;
 		readonly Dictionary<string, string> langs = new Dictionary<string, string>()
 		{
 			{".txt", "Текстовый файл"},
@@ -66,6 +67,10 @@ namespace Tekstoviy_redaktor
 			textbox.SelectionStart = 0;
 		}
 
+		static public void Set_isSearchWindow(bool new_flag)
+        {
+            isSearchWindow = new_flag;
+        }
 		private void New_document_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
@@ -111,7 +116,7 @@ namespace Tekstoviy_redaktor
 				"|Ini |*.ini|Java |*.java|JavaScript |*.js|JSON |*.json|Log |*.log|Lua |*.lua|Makefile |.mak|Objective-C |*.m" +
 				"|Objective-C++ |*.mm|Perl |*.pl|PHP |*.php|PowerShell |*.ps1|Properties |*.conf, *.properties|Python |*.py|R |*.r|Ruby |*.rb" +
 				"|Rust |*.rs|Shell Script |*.sh, *.bash|SQL |*.sql|Swift |*.swift|Toml |*.toml|TypeScript |*.ts|Visual Basic |*.vb|XML |*.xml|YAML |*.yml, *.yaml|Все файлы |*.*";
-            openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
+			openFileDialog.FilterIndex = openFileDialog.Filter.Length - 1;
 			
 			if (openFileDialog.ShowDialog() == true)
 			{
@@ -119,20 +124,20 @@ namespace Tekstoviy_redaktor
 				textbox.Text = File.ReadAllText(openFileDialog.FileName);
 				window.Title = Filename + " - Notepad";
 				try
-                {
+				{
 					languages.Text = langs[Path.GetExtension(Filename)];
-                }
+				}
 				catch (KeyNotFoundException)
-                {
+				{
 					if (Path.GetExtension(Filename) == ".cmd")
-                    {
+					{
 						languages.Text = langs[".bat"];
 					}
 					if (Path.GetExtension(Filename) == ".jenkinsfile") {
 						languages.Text = langs[".groovy"];
 					}
 					if (Path.GetExtension(Filename) == ".properties")
-                    {
+					{
 						languages.Text = langs[".conf"];
 					}
 					if (Path.GetExtension(Filename) == ".bash")
@@ -228,7 +233,7 @@ namespace Tekstoviy_redaktor
 			{
 				TextWriter textWriter = new StreamWriter(Filename);
 				textWriter.Write(textbox.Text);
-                textWriter.Close();
+				textWriter.Close();
 				Close();
 			}
 			else
@@ -251,7 +256,7 @@ namespace Tekstoviy_redaktor
 					Filename = saveFileDialog.FileName;
 					TextWriter textWriter = new StreamWriter(saveFileDialog.FileName);
 					textWriter.Write(textbox.Text);
-                    textWriter.Close();
+					textWriter.Close();
 				}
 				Close();
 			}
@@ -289,7 +294,12 @@ namespace Tekstoviy_redaktor
 
 		private void Find_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (isSearchWindow == false)
+			{
+				SearchWindow searchWindow = new SearchWindow();
+				searchWindow.Owner = this;
+				searchWindow.Show();
+			}		
 		}
 
 		private void Replace_Click(object sender, RoutedEventArgs e)
@@ -313,7 +323,7 @@ namespace Tekstoviy_redaktor
 
 		private void Font_style_Click(object sender, RoutedEventArgs e)
 		{
-            System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
 			//fontDialog.Font = new System.Drawing.Font(textbox.FontFamily.ToString(), (float)textbox.FontSize);
 			fontDialog.ShowEffects = false;
 			fontDialog.MaxSize = 48;
@@ -321,47 +331,47 @@ namespace Tekstoviy_redaktor
 			//textbox.Text += "\n" + textbox.FontFamily.ToString() + "\n" + fontDialog.Font.FontFamily.ToString();
 
 			if (fontDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
-            {
+			{
 				string fontfamily = fontDialog.Font.FontFamily.ToString();
-                textbox.FontFamily = new FontFamily(fontfamily);	
+				textbox.FontFamily = new FontFamily(fontfamily);	
 				textbox.FontSize = fontDialog.Font.Size;
 				digit_bar.FontSize = fontDialog.Font.Size;
 				
 				if (fontDialog.Font.Bold)
-                {
+				{
 					if (fontDialog.Font.Italic)
-                    {
+					{
 						textbox.FontWeight = FontWeights.Bold;
 						textbox.FontStyle = FontStyles.Italic;
 					}
 					else
-                    {
+					{
 						textbox.FontStyle = FontStyles.Normal;
 						textbox.FontWeight = FontWeights.Bold;
-                    }	
-                } 
+					}	
+				} 
 				else if (fontDialog.Font.Italic)
-                {
+				{
 					textbox.FontStyle = FontStyles.Italic;
 					textbox.FontWeight = FontWeights.Normal;
 				}
 				else if (!fontDialog.Font.Bold & !fontDialog.Font.Italic)
-                {
+				{
 					textbox.FontWeight = FontWeights.Normal;
 					textbox.FontStyle = FontStyles.Normal;
 				}
 				else
-                {
+				{
 					textbox.FontWeight = FontWeights.Bold;
 					textbox.FontStyle = FontStyles.Italic;
 				}
-            }
+			}
 		}
 
 		private void Increase_scale_Click(object sender, RoutedEventArgs e)
 		{
 			if (scalex < 3 && scaley < 3)
-            {
+			{
 				scalex += 0.25;
 				scaley += 0.25;
 				mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
@@ -392,28 +402,27 @@ namespace Tekstoviy_redaktor
 		{
 			Window1 about_program = new Window1();
 			if (about_program.ShowDialog() == true)
-            {
+			{
 				about_program.Show();
-            }
-			
+			}
 		}
 
-        private void Textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+		private void Textbox_TextChanged(object sender, TextChangedEventArgs e)
+		{
 			int strs = textbox.LineCount - 1;
 			int s = 2;
 			digit_bar.Text = "1";
 			for (int i = 0; i < strs; i++)
-            {
+			{
 				digit_bar.Text += "\n" + s.ToString();
 				s++;
-            }
+			}
 			digit_bar.ScrollToEnd();
 			int row = 1;
-            int tmp = -1;
+			int tmp = -1;
 
 			for (int i = 0; i <= textbox.SelectionStart; i++)
-            {
+			{
 				try
 				{
 					if (textbox.Text[i] == '\n')
@@ -427,26 +436,26 @@ namespace Tekstoviy_redaktor
 				}
 
 			}
-            int col = textbox.SelectionStart - tmp;
-            curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
+			int col = textbox.SelectionStart - tmp;
+			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
-        private void Textbox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
+		private void Textbox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+		{
 			if (e.Delta > 0)
-            {
+			{
 				digit_bar.ScrollToVerticalOffset(digit_bar.VerticalOffset - 54);
 				textbox.ScrollToVerticalOffset(textbox.VerticalOffset - 54);
-            }	
+			}	
 			else if (e.Delta < 0)
-            {
+			{
 				digit_bar.ScrollToVerticalOffset(digit_bar.VerticalOffset + 54);
 				textbox.ScrollToVerticalOffset(textbox.VerticalOffset + 54);
 			}
-        }
+		}
 
-        private void Textbox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
+		private void Textbox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		{
 			int row = 1;
 			int tmp = -1;
 
@@ -496,7 +505,7 @@ namespace Tekstoviy_redaktor
 				curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 			}
 			if (e.Key == Key.F5)
-            {
+			{
 				string tmp = Clipboard.GetText();
 				DateTime dateTime = DateTime.Now;
 				Clipboard.SetText(dateTime.ToLocalTime().ToString());
@@ -504,10 +513,10 @@ namespace Tekstoviy_redaktor
 				Clipboard.SetText(tmp);
 			}
 			if (isCtrl)
-            {
+			{
 				textbox.IsEnabled = false;
 				if (e.Key == Key.N && isShift == false)
-                {
+				{
 					if (Filename != null)
 					{
 						TextWriter textWriter = new StreamWriter(@Filename);
@@ -537,7 +546,7 @@ namespace Tekstoviy_redaktor
 					}
 				}
 				if (e.Key == Key.S && isShift == false)
-                {
+				{
 					if (Filename != null)
 					{
 						TextWriter textWriter = new StreamWriter(Filename);
@@ -570,7 +579,7 @@ namespace Tekstoviy_redaktor
 					}			
 				}
 				if (e.Key == Key.O && isShift == false)
-                {
+				{
 					OpenFileDialog openFileDialog = new OpenFileDialog();
 					openFileDialog.Filter = "Текстовые файлы |*.txt|Batch |*.bat, *.cmd|C |*.c|C++ |*.cpp|Заголовочный файл C |*.h|Заголовочный файл C++| *.hpp" +
 						"|C# |*.cs|CMake| *.cmake|CSS |*.css|Diff |*.diff|Docker| *.docker|F# |*.fs|Golang |*.go|Groovy |*.groovy, *.jenkinsfile|HTML |*.html" +
@@ -614,11 +623,11 @@ namespace Tekstoviy_redaktor
 					}
 				}
 				if (e.Key == Key.P && isShift == false)
-                {
+				{
 
-                }
+				}
 				if (e.Key == Key.OemPlus && isShift == false)
-                {
+				{
 					if (scalex < 3 && scaley < 3)
 					{
 						scalex += 0.25;
@@ -628,7 +637,7 @@ namespace Tekstoviy_redaktor
 					}
 				}
 				if (e.Key == Key.OemMinus && isShift == false)
-                {
+				{
 					if (scalex > 0.25 && scaley > 0.25)
 					{
 						scalex -= 0.25;
@@ -638,21 +647,21 @@ namespace Tekstoviy_redaktor
 					}
 				}
 				if (e.Key == Key.D0 && isShift == false)
-                {
+				{
 					scalex = 1;
 					scaley = 1;
 					mainview.LayoutTransform = new ScaleTransform(scalex, scaley);
 					scale1.Content = (scalex * 100).ToString() + '%';
 				}
 				if (isShift)
-                {
+				{
 					if (e.Key == Key.N)
-                    {
+					{
 						MainWindow window = new MainWindow();
 						window.Show();
 					}
 					if (e.Key == Key.S)
-                    {
+					{
 						SaveFileDialog saveFileDialog = new SaveFileDialog();
 						saveFileDialog.CreatePrompt = true;
 						saveFileDialog.OverwritePrompt = true;
@@ -676,41 +685,41 @@ namespace Tekstoviy_redaktor
 						}
 					}
 				}
-            }
+			}
 			textbox.IsEnabled = true;	
 		}
 
-        private void Textbox_KeyDown(object sender, KeyEventArgs e)
-        {
+		private void Textbox_KeyDown(object sender, KeyEventArgs e)
+		{
 			if (e.Key == Key.LeftCtrl)
-            {
+			{
 				isCtrl = true;
-            }
+			}
 			if (e.Key == Key.LeftShift)
-            {
+			{
 				isShift = true;
-            }
-        }
+			}
+		}
 
-        private void Textbox_KeyUp(object sender, KeyEventArgs e)
-        {
+		private void Textbox_KeyUp(object sender, KeyEventArgs e)
+		{
 			if (e.Key == Key.LeftCtrl)
-            {
+			{
 				isCtrl = false;
-            }
+			}
 			if (e.Key == Key.LeftShift)
-            {
+			{
 				isShift = false;
-            }
-        }
+			}
+		}
 
-        private void Info_Click(object sender, RoutedEventArgs e)
-        {
+		private void Info_Click(object sender, RoutedEventArgs e)
+		{
 			Info info = new Info();
 			if (info.ShowDialog() == true)
-            {
+			{
 				info.Show();
-            }
-        }
-    }
+			}
+		}
+	}
 }

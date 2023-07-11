@@ -21,6 +21,6 @@
             </Separator.RenderTransform>
         </Separator>
         <TextBox Margin="10,37,244,12" TextWrapping="Wrap" BorderThickness="0,0,0,0" Text="Создать - CTRL+N&#xA;Новое окно - CTRL+SHIFT+N&#xA;Открыть - CTRL+O&#xA;Сохранить - CTRL+S&#xA;Сохранить как - CTRL+SHIFT+S&#xA;Печать - CTRL+P&#xA;Отменить - CTRL+Z&#xA;Вернуть - CTRL+Y&#xD;&#xA;Вырезать - CTRL+X&#xD;&#xA;Копировать - CTRL+C&#xA;&#xA;"/>
-        <TextBox Margin="221,39,10,10" TextWrapping="Wrap" BorderThickness="0,0,0,0" Text="Вставить - CTRL+V&#xD;&#xA;Удалить - Del&#xD;&#xA;Найти - CTRL+F&#xD;&#xA;Заменить - CTRL+H&#xD;&#xA;Выделить всё - CTRL+A&#xD;&#xA;Дата и время - F5&#xD;&#xA;Увеличить масштаб - CTRL+плюс(+)&#xD;&#xA;Уменьшить масштаб - CTRL+минус(-)&#xD;&#xA;Масштаб по умолчанию - CTRL+0"/>
+        <TextBox Margin="221,39,10,10" TextWrapping="Wrap" BorderThickness="0,0,0,0" Text="Вставить - CTRL+V&#xA;Удалить - Del&#xA;Найти - CTRL+F&#xA;Заменить - CTRL+H&#xA;Выделить всё - CTRL+A&#xA;Дата и время - F5&#xA;Увеличить масштаб - CTRL+плюс(+)&#xA;Уменьшить масштаб - CTRL+минус(-)&#xA;Масштаб по умолчанию - CTRL+0&#xD;&#xA;Выход - ALT+F4"/>
     </Grid>
 </Window>
