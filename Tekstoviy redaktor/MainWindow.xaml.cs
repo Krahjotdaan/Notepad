@@ -67,10 +67,23 @@ namespace Tekstoviy_redaktor
 			textbox.SelectionStart = 0;
 		}
 
-		static public void Set_isSearchWindow(bool new_flag)
-        {
-            isSearchWindow = new_flag;
-        }
+		public void Set_isSearchWindow(bool new_flag)
+		{
+			isSearchWindow = new_flag;
+		}
+
+		public void Find_Text(string serTxt)
+		{
+			if (textbox.Text.Contains(serTxt))
+			{
+				textbox.Select(textbox.Text.IndexOf(serTxt), serTxt.Length);
+			}
+			else
+            {
+				MessageBox.Show($"Не удаётся найти {serTxt}");
+            }
+		}
+
 		private void New_document_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
