@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -72,16 +73,32 @@ namespace Tekstoviy_redaktor
 			isSearchWindow = new_flag;
 		}
 
-		public void Find_Text(string serTxt)
+		public void Find_Text(string serTxt, bool withRegister)
 		{
-			if (textbox.Text.Contains(serTxt))
-			{
-				textbox.Select(textbox.Text.IndexOf(serTxt), serTxt.Length);
-			}
+			if (!withRegister)
+            {
+				var contains = Regex.Match(textbox.Text, Regex.Escape(serTxt), RegexOptions.IgnoreCase);
+				if (contains.Success)
+                {
+					textbox.Select(textbox.Text.IndexOf(contains.Value), contains.Value.Length);
+                }
+				else
+                {
+					MessageBox.Show($"Не удаётся найти {serTxt}");
+                }
+            }
 			else
             {
-				MessageBox.Show($"Не удаётся найти {serTxt}");
-            }
+				var contains = Regex.Match(textbox.Text, Regex.Escape(serTxt));
+				if (contains.Success)
+				{
+					textbox.Select(textbox.Text.IndexOf(contains.Value), contains.Value.Length);
+				}
+				else
+				{
+					MessageBox.Show($"Не удаётся найти {serTxt}");
+				}
+			}
 		}
 
 		private void New_document_Click(object sender, RoutedEventArgs e)

@@ -17,7 +17,7 @@ namespace Tekstoviy_redaktor
 		{
 			MainWindow mainWindow = (MainWindow)Owner;
 			mainWindow.Activate();
-			mainWindow.Find_Text(SearchedWord.Text);
+			mainWindow.Find_Text(SearchedWord.Text, (bool)IsRegister.IsChecked);
 		}
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
