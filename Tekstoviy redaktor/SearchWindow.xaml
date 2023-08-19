@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tekstoviy_redaktor"
         mc:Ignorable="d"
-        Title="Найти" Height="109" Width="400" ResizeMode="CanMinimize" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterOwner" WindowState="Normal" Topmost="True" Closed="SearchForm_Closed" AllowDrop="True" Loaded="SearchForm_Loaded">
+        Title="Найти" Height="127" Width="419" ResizeMode="CanMinimize" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterOwner" WindowState="Normal" Topmost="True" Closed="SearchForm_Closed" AllowDrop="True" Loaded="SearchForm_Loaded">
     <Grid Margin="0,0,0,-16">
         <TextBox x:Name="SearchedWord" Margin="39,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="261" Height="18" VerticalAlignment="Top"/>
         <Label Content="Что:" Margin="7,10,0,0" Padding="0,0,0,0" HorizontalAlignment="Left" Width="32" Height="18" VerticalAlignment="Top"/>
         <CheckBox x:Name="IsRegister" Content="С учётом регистра" Margin="7,38,0,0" HorizontalAlignment="Left" Width="122" Height="15" VerticalAlignment="Top"/>
-        <Button x:Name="SearchButton" Content="Найти" Margin="0,9,19,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SearchButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="56"/>
-        <Button x:Name="CancelButton" Content="Отмена" Margin="0,38,19,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CancelButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="56"/>
+        <Button x:Name="SearchNextButton" Content="Найти далее" Margin="0,9,9,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SearchNextButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="76"/>
+        <Button x:Name="CancelButton" Content="Отмена" Margin="0,60,9,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CancelButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="76"/>
+        <Button x:Name="SearchPrevButton" Content="Найти ранее" Margin="0,34,9,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SearchPrevButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="76"/>
+        <Label x:Name="matches" Content="Совпадение:" HorizontalAlignment="Left" Margin="179,38,0,0" VerticalAlignment="Top" Height="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
     </Grid>
 </Window>

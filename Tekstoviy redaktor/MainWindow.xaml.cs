@@ -18,6 +18,7 @@ namespace Tekstoviy_redaktor
 		bool isShift = false;
 		bool isCtrl = false;
 		static bool isSearchWindow = false;
+		static bool isReplaceWindow = false;
 		readonly Dictionary<string, string> langs = new Dictionary<string, string>()
 		{
 			{".txt", "Текстовый файл"},
@@ -73,31 +74,50 @@ namespace Tekstoviy_redaktor
 			isSearchWindow = new_flag;
 		}
 
-		public void Find_Text(string serTxt, bool withRegister)
+		public void Set_isReplaceWindow(bool new_flag)
 		{
-			if (!withRegister)
+			isReplaceWindow = new_flag;
+		}
+
+		public void Find_Text(string serTxt, int position, bool withRegister)
+		{
+            MatchCollection contains;
+            if (!withRegister)
             {
-				var contains = Regex.Match(textbox.Text, Regex.Escape(serTxt), RegexOptions.IgnoreCase);
-				if (contains.Success)
-                {
-					textbox.Select(textbox.Text.IndexOf(contains.Value), contains.Value.Length);
-                }
-				else
-                {
-					MessageBox.Show($"Не удаётся найти {serTxt}");
-                }
-            }
+				contains = Regex.Matches(textbox.Text, Regex.Escape(serTxt), RegexOptions.IgnoreCase);
+			}
 			else
             {
-				var contains = Regex.Match(textbox.Text, Regex.Escape(serTxt));
-				if (contains.Success)
+				contains = Regex.Matches(textbox.Text, Regex.Escape(serTxt));
+			}
+
+			if (contains.Count > 0)
+			{
+				int i = 0;
+				foreach (Match match in contains)
 				{
-					textbox.Select(textbox.Text.IndexOf(contains.Value), contains.Value.Length);
+					if (i == position)
+					{
+						textbox.Select(match.Index, match.Length);
+						break;
+					}
+					else
+					{
+						i++;
+					}
 				}
-				else
-				{
-					MessageBox.Show($"Не удаётся найти {serTxt}");
-				}
+			}
+			else
+			{
+				MessageBox.Show($"Не удаётся найти '{serTxt}'");
+			}
+		}
+
+		public void Replace_Text(string repTxt)
+		{
+			if (textbox.SelectedText != "")
+			{
+				textbox.SelectedText = repTxt;
 			}
 		}
 
@@ -334,7 +354,12 @@ namespace Tekstoviy_redaktor
 
 		private void Replace_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (isReplaceWindow == false)
+			{
+				ReplaceWindow replaceWindow = new ReplaceWindow();
+				replaceWindow.Owner = this;
+				replaceWindow.Show();
+			}
 		}
 
 		private void Highlight_all_Click(object sender, RoutedEventArgs e)
@@ -503,7 +528,6 @@ namespace Tekstoviy_redaktor
 				{
 					break;
 				}
-
 			}
 			int col = textbox.SelectionStart - tmp;
 			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
