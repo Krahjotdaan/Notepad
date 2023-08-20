@@ -113,14 +113,6 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
-		public void Replace_Text(string repTxt)
-		{
-			if (textbox.SelectedText != "")
-			{
-				textbox.SelectedText = repTxt;
-			}
-		}
-
 		private void New_document_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
