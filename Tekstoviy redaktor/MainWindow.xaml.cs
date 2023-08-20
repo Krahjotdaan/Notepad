@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -81,13 +83,13 @@ namespace Tekstoviy_redaktor
 
 		public void Find_Text(string serTxt, int position, bool withRegister)
 		{
-            MatchCollection contains;
-            if (!withRegister)
-            {
+			MatchCollection contains;
+			if (!withRegister)
+			{
 				contains = Regex.Matches(textbox.Text, Regex.Escape(serTxt), RegexOptions.IgnoreCase);
 			}
 			else
-            {
+			{
 				contains = Regex.Matches(textbox.Text, Regex.Escape(serTxt));
 			}
 
@@ -256,17 +258,20 @@ namespace Tekstoviy_redaktor
 		private void Page_settings_Click(object sender, RoutedEventArgs e)
 		{
 			System.Windows.Forms.PageSetupDialog pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
-			pageSetupDialog.PageSettings = new System.Drawing.Printing.PageSettings();
-
+			pageSetupDialog.PageSettings = new PageSettings();
 			pageSetupDialog.ShowNetwork = false;
-
-			// System.Windows.Forms.DialogResult result = pageSetupDialog.ShowDialog();
+			pageSetupDialog.ShowDialog();
 		}
 
 		private void Printing_Click(object sender, RoutedEventArgs e)
 		{
+			PrintDocument printDocument = new PrintDocument();
+			printDocument.PrintPage += PrintHandler;
 			PrintDialog printDialog = new PrintDialog();
-			printDialog.ShowDialog();
+			if (printDialog.ShowDialog() == true)
+            {
+				printDocument.Print();
+            }
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e)
@@ -370,7 +375,7 @@ namespace Tekstoviy_redaktor
 
 		private void Font_style_Click(object sender, RoutedEventArgs e)
 		{
-            System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
 			//fontDialog.Font = new System.Drawing.Font(textbox.FontFamily.ToString(), (float)textbox.FontSize);
 			fontDialog.ShowEffects = false;
 			fontDialog.MaxSize = 48;
@@ -380,7 +385,7 @@ namespace Tekstoviy_redaktor
 			if (fontDialog.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
 			{
 				string fontfamily = fontDialog.Font.FontFamily.ToString();
-				textbox.FontFamily = new FontFamily(fontfamily);	
+				textbox.FontFamily = new System.Windows.Media.FontFamily(fontfamily);	
 				textbox.FontSize = fontDialog.Font.Size;
 				digit_bar.FontSize = fontDialog.Font.Size;
 				
@@ -766,6 +771,13 @@ namespace Tekstoviy_redaktor
 			{
 				info.Show();
 			}
+		}
+
+		void PrintHandler(object sender, PrintPageEventArgs e)
+		{
+			string fontfam = textbox.FontFamily.Source;
+			float fonts = (float)textbox.FontSize;
+			e.Graphics.DrawString(textbox.Text, new Font(fontfam, fonts), System.Drawing.Brushes.Black, 0, 0);
 		}
 	}
 }
