@@ -378,7 +378,7 @@ namespace Tekstoviy_redaktor
 
 		private void Font_style_Click(object sender, RoutedEventArgs e)
 		{
-			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
+            System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
 			//fontDialog.Font = new System.Drawing.Font(textbox.FontFamily.ToString(), (float)textbox.FontSize);
 			fontDialog.ShowEffects = false;
 			fontDialog.MaxSize = 48;

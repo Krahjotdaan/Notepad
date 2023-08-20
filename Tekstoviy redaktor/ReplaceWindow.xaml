@@ -1,0 +1,23 @@
+﻿<Window x:Name="ReplaceForm" x:Class="Tekstoviy_redaktor.ReplaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tekstoviy_redaktor"
+        mc:Ignorable="d"
+        Title="Заменить" Height="193" Width="448" Loaded="ReplaceForm_Loaded" Closed="ReplaceForm_Closed" ResizeMode="CanMinimize" Topmost="True">
+    <Grid>
+        <Label Content="Что:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="16" Padding="0,0,0,0"/>
+        <TextBox x:Name="ReplacedText" Margin="37,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" HorizontalAlignment="Left" Width="303"/>
+        <Button x:Name="SearchNextButton" Content="Найти далее" Margin="0,8,5,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Click="SearchNextButton_Click"/>
+        <Label Content="Чем:" HorizontalAlignment="Left" Margin="9,37,0,0" VerticalAlignment="Top" Height="16" Padding="0,0,0,0"/>
+        <TextBox x:Name="NewText" Margin="37,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" HorizontalAlignment="Left" Width="303"/>
+        <Button x:Name="SearchPrevButton" Content="Найти ранее" Margin="0,35,5,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Click="SearchPrevButton_Click"/>
+        <Button x:Name="ReplaceButton" Content="Заменить" Margin="0,60,5,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Click="ReplaceButton_Click"/>
+        <Button x:Name="ReplaceAllButton" Content="Заменить всё" Margin="0,85,5,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Click="ReplaceAllButton_Click"/>
+        <Button x:Name="CancelButton" Content="Отмена" Margin="0,110,5,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="77" Click="CancelButton_Click"/>
+        <CheckBox x:Name="IsRegister" Content="С учётом регистра" Margin="9,74,0,0" HorizontalAlignment="Left" Width="122" Height="15" VerticalAlignment="Top"/>
+        <Label x:Name="matches" Content="Совпадение:" HorizontalAlignment="Left" Margin="188,73,0,0" VerticalAlignment="Top" Height="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
+
+    </Grid>
+</Window>
