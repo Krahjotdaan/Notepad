@@ -16,6 +16,11 @@ namespace Tekstoviy_redaktor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// setting main window as owner of replace window and true activity status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReplaceForm_Loaded(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Owner;
@@ -23,6 +28,11 @@ namespace Tekstoviy_redaktor
             mainWindow.Set_isReplaceWindow(true);
         }
 
+        /// <summary>
+        /// setting main window as owner of replace window and false activity status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReplaceForm_Closed(object sender, EventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Owner;
@@ -30,6 +40,11 @@ namespace Tekstoviy_redaktor
             mainWindow.Set_isReplaceWindow(false);
         }
 
+        /// <summary>
+        /// selecting next match
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchNextButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Owner;
@@ -50,6 +65,11 @@ namespace Tekstoviy_redaktor
             mainWindow.Find_Text(ReplacedText.Text, position, (bool)IsRegister.IsChecked);
         }
 
+        /// <summary>
+        /// selecting previous match
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchPrevButton_Click(object sender, RoutedEventArgs e)
         {
             if (position > 0)
@@ -62,6 +82,11 @@ namespace Tekstoviy_redaktor
             mainWindow.Find_Text(ReplacedText.Text, position, (bool)IsRegister.IsChecked);
         }
 
+        /// <summary>
+        /// replacing selected match by new text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReplaceButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Owner;
@@ -77,6 +102,11 @@ namespace Tekstoviy_redaktor
             }
         }
 
+        /// <summary>
+        /// replacing all matches by new text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReplaceAllButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Owner;
@@ -91,6 +121,11 @@ namespace Tekstoviy_redaktor
             }
         }
 
+        /// <summary>
+        /// closing replace window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -71,16 +71,30 @@ namespace Tekstoviy_redaktor
 			textbox.SelectionStart = 0;
 		}
 
+		/// <summary>
+		/// sets the activity status of the search window
+		/// </summary>
+		/// <param name="new_flag"> new activity status </param>
 		public void Set_isSearchWindow(bool new_flag)
 		{
 			isSearchWindow = new_flag;
 		}
 
+		/// <summary>
+		/// sets the activity status of the replace window
+		/// </summary>
+		/// <param name="new_flag"> new activity status </param>
 		public void Set_isReplaceWindow(bool new_flag)
 		{
 			isReplaceWindow = new_flag;
 		}
 
+		/// <summary>
+		/// function of text selection by regular expression 
+		/// </summary>
+		/// <param name="serTxt"> search text </param>
+		/// <param name="position"> number of match </param>
+		/// <param name="withRegister"> case sensitive </param>
 		public void Find_Text(string serTxt, int position, bool withRegister)
 		{
 			MatchCollection contains;
@@ -115,6 +129,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// creating a new document
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void New_document_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
@@ -146,12 +165,22 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// opening new main window
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void New_window_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow window = new MainWindow();
 			window.Show();
 		}
 
+		/// <summary>
+		/// calling dialog window of file opening
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Open_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();	
@@ -196,6 +225,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// calling dialog window of file saving
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Save_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
@@ -230,6 +264,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// calling dialog window of file saving with extentions selection
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Save_as_Click(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -255,6 +294,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// setting a page parameters for printing
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Page_settings_Click(object sender, RoutedEventArgs e)
 		{
 			System.Windows.Forms.PageSetupDialog pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
@@ -263,17 +307,27 @@ namespace Tekstoviy_redaktor
 			pageSetupDialog.ShowDialog();
 		}
 
+		/// <summary>
+		/// calling dialog window of printing
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Printing_Click(object sender, RoutedEventArgs e)
 		{
 			PrintDocument printDocument = new PrintDocument();
 			printDocument.PrintPage += PrintHandler;
 			PrintDialog printDialog = new PrintDialog();
 			if (printDialog.ShowDialog() == true)
-            {
+			{
 				printDocument.Print();
-            }
+			}
 		}
 
+		/// <summary>
+		/// closing main window
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Exit_Click(object sender, RoutedEventArgs e)
 		{
 			if (Filename != null)
@@ -309,36 +363,71 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// undo last action
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Undo();
 		}
 
+		/// <summary>
+		/// redo last action
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Redo_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Redo();
 		}
 
+		/// <summary>
+		/// cutting selected text and move it to clipboard
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Cut_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Cut();
 		}
 
+		/// <summary>
+		/// copying selected text
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Copy_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Copy();
 		}
 
+		/// <summary>
+		/// pasting text on clipboard
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Insert_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.Paste();
 		}
 
+		/// <summary>
+		/// deleting selected text
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Delete_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.SelectedText = "";
 		}
 
+		/// <summary>
+		/// calling dialog window of searching
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Find_Click(object sender, RoutedEventArgs e)
 		{
 			if (isSearchWindow == false)
@@ -349,6 +438,11 @@ namespace Tekstoviy_redaktor
 			}		
 		}
 
+		/// <summary>
+		/// calling dialog window of replacing
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Replace_Click(object sender, RoutedEventArgs e)
 		{
 			if (isReplaceWindow == false)
@@ -359,11 +453,21 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// selection of all text
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Highlight_all_Click(object sender, RoutedEventArgs e)
 		{
 			textbox.SelectAll();
 		}
 
+		/// <summary>
+		/// pasting datetime
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Datetime_Click(object sender, RoutedEventArgs e)
 		{
 			string tmp = Clipboard.GetText();
@@ -373,6 +477,11 @@ namespace Tekstoviy_redaktor
 			Clipboard.SetText(tmp);
 		}
 
+		/// <summary>
+		/// setting fontfamily, fontstyle and fontsize
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Font_style_Click(object sender, RoutedEventArgs e)
 		{
 			System.Windows.Forms.FontDialog fontDialog = new System.Windows.Forms.FontDialog();
@@ -420,6 +529,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// increase scale
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Increase_scale_Click(object sender, RoutedEventArgs e)
 		{
 			if (scalex < 3 && scaley < 3)
@@ -431,6 +545,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// decrease scale
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Decrease_scale_Click(object sender, RoutedEventArgs e)
 		{
 			if (scalex > 0.25 && scaley > 0.25)
@@ -442,6 +561,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// default scale
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Default_scale_Click(object sender, RoutedEventArgs e)
 		{
 			scalex = 1;
@@ -450,6 +574,11 @@ namespace Tekstoviy_redaktor
 			scale1.Content = (scalex * 100).ToString() + '%';
 		}
 
+		/// <summary>
+		/// calling dialog AboutProgram window
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void About_program_Click(object sender, RoutedEventArgs e)
 		{
 			Window1 about_program = new Window1();
@@ -459,6 +588,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// handler of text changing, cursor positioning 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			int strs = textbox.LineCount - 1;
@@ -486,12 +620,16 @@ namespace Tekstoviy_redaktor
 				catch (IndexOutOfRangeException) {
 					break;
 				}
-
 			}
 			int col = textbox.SelectionStart - tmp;
 			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
+		/// <summary>
+		/// page scrolling
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			if (e.Delta > 0)
@@ -505,7 +643,11 @@ namespace Tekstoviy_redaktor
 				textbox.ScrollToVerticalOffset(textbox.VerticalOffset + 54);
 			}
 		}
-
+		/// <summary>
+		/// page scrolling
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
 			int row = 1;
@@ -530,6 +672,11 @@ namespace Tekstoviy_redaktor
 			curs_position.Content = $"Стр: {row}; Стлб: {col}; Поз: {textbox.SelectionStart + 1}";
 		}
 
+		/// <summary>
+		/// handler of hotkeys
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_PreviewKeyDown(object sender, KeyEventArgs e)
 		{ 
 			if (e.Key == Key.Left || e.Key == Key.Right)
@@ -740,6 +887,11 @@ namespace Tekstoviy_redaktor
 			textbox.IsEnabled = true;	
 		}
 
+		/// <summary>
+		/// handler of pressing CONTROL
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.LeftCtrl)
@@ -752,6 +904,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// handler of releasing CONTROL
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Textbox_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.LeftCtrl)
@@ -764,6 +921,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// calling dialog window with information about hotkeys
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Info_Click(object sender, RoutedEventArgs e)
 		{
 			Info info = new Info();
@@ -773,6 +935,11 @@ namespace Tekstoviy_redaktor
 			}
 		}
 
+		/// <summary>
+		/// handler of text drawing before printing
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		void PrintHandler(object sender, PrintPageEventArgs e)
 		{
 			string fontfam = textbox.FontFamily.Source;

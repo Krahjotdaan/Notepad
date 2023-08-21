@@ -16,6 +16,11 @@ namespace Tekstoviy_redaktor
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// selecting next match
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchNextButton_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow mainWindow = (MainWindow)Owner;
@@ -36,6 +41,11 @@ namespace Tekstoviy_redaktor
 			mainWindow.Find_Text(SearchedWord.Text, position, (bool)IsRegister.IsChecked);
 		}
 
+		/// <summary>
+		/// selecting previous match
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchPrevButton_Click(object sender, RoutedEventArgs e)
         {
 			if (position > 0)
@@ -48,17 +58,32 @@ namespace Tekstoviy_redaktor
 			mainWindow.Find_Text(SearchedWord.Text, position, (bool)IsRegister.IsChecked);
 		}
 
+		/// <summary>
+		/// closing search window
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();	
 		}
 
+		/// <summary>
+		/// setting main window as owner of search window and false activity status
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchForm_Closed(object sender, EventArgs e)
 		{
 			MainWindow mainWindow = (MainWindow)Owner;
 			mainWindow.Set_isSearchWindow(false);
 		}
 
+		/// <summary>
+		/// setting main window as owner of search window and true activity status
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchForm_Loaded(object sender, RoutedEventArgs e)
 		{
 			MainWindow mainWindow = (MainWindow)Owner;
